@@ -3,7 +3,7 @@ package authentication;
 import java.io.*;
 
 public class Authentication {
-    private static final String ACCOUNT_FILE = "C:\\Users\\ADMIN\\Desktop\\New folder (2)\\JavaProgramming1\\src\\data\\account.txt"; // Path to account.txt file
+    private static final String ACCOUNT_FILE = "src/data/account.txt"; // Path to account.txt file
 
     // Method for login
     public static void login(String username, String password) throws IOException {

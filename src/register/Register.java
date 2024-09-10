@@ -3,7 +3,7 @@ package register;
 import java.io.*;
 
 public class Register {
-    private static final String ACCOUNT_FILE = "C:\\Users\\ADMIN\\Desktop\\New folder (2)\\JavaProgramming1\\src\\data\\account.txt"; // Path to account.txt file
+    private static final String ACCOUNT_FILE = "src/data/account.txt"; // Path to account.txt file
 
     // Method to register a new account
     public static void register(String username, String password, String role) throws IOException {
