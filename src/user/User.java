@@ -9,7 +9,6 @@ public abstract class User {
     protected String phoneNumber;
     protected String email;
     protected String role; // Manager, Employee, Client
-    protected String membershipLevel;
     protected String status; // Active/Inactive
 
     //Constructor
@@ -23,7 +22,6 @@ public abstract class User {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.role = role;
-        this.membershipLevel = membershipLevel;
         this.status = status;
     }
 
@@ -93,14 +91,6 @@ public abstract class User {
         this.role = userType;
     }
 
-    public String getMembershipLevel() {
-        return membershipLevel;
-    }
-
-    public void setMembershipLevel(String membershipLevel) {
-        this.membershipLevel = membershipLevel;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -121,7 +111,6 @@ public abstract class User {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", role='" + role + '\'' +
-                ", membershipLevel='" + membershipLevel + '\'' +
                 ", status=" + status +
                 '}';
     }
