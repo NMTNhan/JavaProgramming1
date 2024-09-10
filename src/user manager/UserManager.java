@@ -4,11 +4,6 @@ import java.util.List;
 public class UserManager {
     private List<User> users = new ArrayList<>();
 
-    // Create user
-    public void addUser(User user) {
-        users.add(user);
-    }
-
     // Soft delete user
     public void removeUser(String userId) {
         for (User user : users) {

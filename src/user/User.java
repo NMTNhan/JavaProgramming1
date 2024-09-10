@@ -1,54 +1,63 @@
-public class User {
-    private String userId;
-    private String fullName;
-    private String dateOfBirth;
-    private String address;
-    private String phoneNumber;
-    private String email;
-    private String username;
-    private String password;
-    private String role; // "Manager" or "Employee"
-    private String membershipLevel; // "None", "Silver", "Gold", "Platinum"
-    private boolean isActive;
+import java.util.Date;
+
+public abstract class User {
+    protected String userID;
+    protected String username;
+    protected String password;
+    protected Date dateOfBirth;
+    protected String address;
+    protected String phoneNumber;
+    protected String email;
+    protected String role; // Manager, Employee, Client
+    protected String membershipLevel;
+    protected String status; // Active/Inactive
 
     //Constructor
-    public User(String userId, String fullName, String dateOfBirth, String address, String phoneNumber, String email,
-                String username, String password, String role, String membershipLevel, boolean isActive) {
-        this.userId = userId;
-        this.fullName = fullName;
+    public User(String userID, String username, String password, Date dateOfBirth, String address,
+                String phoneNumber, String email, String role, String status) {
+        this.userID = userID;
+        this.username = username;
+        this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.username = username;
-        this.password = password;
         this.role = role;
         this.membershipLevel = membershipLevel;
-        this.isActive = isActive;
+        this.status = status;
     }
 
     //Getters and Setters
-    public String getUserId() {
-        return userId;
+
+    public String getUserID() {
+        return userID;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getDateOfBirth() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -76,28 +85,12 @@ public class User {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
+    public String getUserType() {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserType(String userType) {
+        this.role = userType;
     }
 
     public String getMembershipLevel() {
@@ -108,20 +101,20 @@ public class User {
         this.membershipLevel = membershipLevel;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public String getStatus() {
+        return status;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     // toString method
     @Override
     public String toString() {
         return "User{" +
-                "userId='" + userId + '\'' +
-                ", fullName='" + fullName + '\'' +
+                "userId='" + userID + '\'' +
+                ", fullName='" + username + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
@@ -129,7 +122,12 @@ public class User {
                 ", username='" + username + '\'' +
                 ", role='" + role + '\'' +
                 ", membershipLevel='" + membershipLevel + '\'' +
-                ", isActive=" + isActive +
+                ", status=" + status +
                 '}';
     }
+
+    // Abstract methods
+    public abstract boolean login(String username, String password);
+    public abstract void viewProfile();
+    public abstract void modifyProfile();
 }

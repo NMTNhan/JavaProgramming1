@@ -4,11 +4,46 @@ import managers.AutoPartManager;
 import managers.ServiceManager;
 import models.AutoPart;
 import models.Service;
+import register.Register;
+import authentication.Authentication;
+import java.io.IOException;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome! Please choose an option: ");
+        System.out.println("1. Login");
+        System.out.println("2. Register");
+        System.out.println("3. Logout");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        if (choice == 1) {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
+            Authentication.login(username, password);
+        } else if (choice == 2) {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
+            System.out.print("Choose role (client, employee, manager): ");
+            String role = scanner.nextLine().toLowerCase();
+            Register.register(username, password, role);
+        } else if (choice == 3) {
+            Authentication.logout();
+        } else {
+            System.out.println("Invalid option!");
+        }
+
+        scanner.close();
+
         AutoPartManager partManager = new AutoPartManager();
         ServiceManager serviceManager = new ServiceManager();
 
