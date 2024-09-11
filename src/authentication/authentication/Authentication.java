@@ -3,7 +3,7 @@ package authentication;
 import java.io.*;
 
 public class Authentication {
-    private static final String ACCOUNT_FILE = "src/data/account.txt"; // Path to account.txt file
+    private static final String ACCOUNT_FILE = "src/data/account"; // Path to account file
 
     // Method for login
     public static void login(String username, String password) throws IOException {
@@ -25,7 +25,7 @@ public class Authentication {
                     case "employee":
                         employeeInterface();
                         break;
-                    case "client":
+                    case "user":
                         clientInterface();
                         break;
                     default:
@@ -46,18 +46,21 @@ public class Authentication {
     private static void managerInterface() {
         System.out.println("Welcome to Manager Interface!");
         // Implement manager-specific operations here
+
     }
 
     // Interface for employee
     private static void employeeInterface() {
         System.out.println("Welcome to Employee Interface!");
         // Implement employee-specific operations here
+
     }
 
-    // Interface for client
+    // Interface for user
     private static void clientInterface() {
         System.out.println("Welcome to Client Interface!");
         // Implement customer-specific operations here
+        
     }
 
     // Method to log out

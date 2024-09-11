@@ -13,6 +13,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException{
+        System.out.println("COSC2081 GROUP ASSIGNMENT\n" +
+                "AUTO168 CAR DEALERSHIP MANAGEMENT SYSTEM\n" +
+                "Instructor: Mr. Minh Vu & Mr. Dung Nguyen\n" +
+                "Group: Group Name\n" +
+                "s3965654, Le Tuan Kiet\n" +
+                "s3935748, Tran Nguyen Khang\n" +
+                "s3924462, Nguyen Minh Trong Nhan\n" +
+                "s3992133, Lu Duc Thinh");
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome! Please choose an option: ");
         System.out.println("1. Login");
@@ -20,7 +29,7 @@ public class Main {
         System.out.println("3. Logout");
 
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline
+        scanner.nextLine();
 
         if (choice == 1) {
             System.out.print("Enter username: ");
@@ -33,7 +42,7 @@ public class Main {
             String username = scanner.nextLine();
             System.out.print("Enter password: ");
             String password = scanner.nextLine();
-            System.out.print("Choose role (client, employee, manager): ");
+            System.out.print("Choose role (user, employee, manager): ");
             String role = scanner.nextLine().toLowerCase();
             Register.register(username, password, role);
         } else if (choice == 3) {

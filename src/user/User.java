@@ -9,7 +9,7 @@ public abstract class User {
     protected String phoneNumber;
     protected String email;
     protected String role; // Manager, Employee, Client
-    protected String status; // Active/Inactive
+    protected String status;
 
     //Constructor
     public User(String userID, String username, String password, Date dateOfBirth, String address,
@@ -119,4 +119,9 @@ public abstract class User {
     public abstract boolean login(String username, String password);
     public abstract void viewProfile();
     public abstract void modifyProfile();
+
+    public abstract Object getUserId();
+    public abstract void setActive(boolean b);
+    public abstract void setMembershipLevel(String membershipLevel);
+    public abstract boolean isActive();
 }
