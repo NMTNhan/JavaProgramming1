@@ -1,10 +1,11 @@
 package managers;
 
 import models.AutoPart;
+import utils.FileUtils;
+
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
-import utils.FileUtils;
 
 public class AutoPartManager {
 
@@ -19,101 +20,58 @@ public class AutoPartManager {
         loadPartsFromFile();
     }
 
-    // Method to load parts from the file
+    // Convert string line from file to an AutoPart object
+    private AutoPart deserializePart(String line) {
+        // Assuming the part is stored as: partID, partName, manufacturer, condition, warranty, cost
+        String[] partsData = line.split(",");
+        return new AutoPart(partsData[0], partsData[1], partsData[2], partsData[3], partsData[4], Double.parseDouble(partsData[5]));
+    }
+
+    // Convert an AutoPart object to string for writing to file
+    private String serializePart(AutoPart part) {
+        return part.getPartID() + "," + part.getPartName() + "," + part.getManufacturer() + "," + part.getCondition() + "," +
+                part.getWarranty() + "," + part.getCost();
+    }
+
+    // Load parts from file
     private void loadPartsFromFile() {
-        List<String> partData = FileUtils.readFile(PART_FILE_PATH);
-        System.out.println("Total lines read from parts.txt: " + partData.size());  // Debug output
-        for (String line : partData) {
-            System.out.println("Reading line: " + line);  // Debug output
-            String[] partsArray = line.split("\\|");
-            if (partsArray.length == 6) {
-                AutoPart part = new AutoPart(partsArray[0], partsArray[1], partsArray[2], partsArray[3], partsArray[4], Double.parseDouble(partsArray[5]));
-                parts.add(part);
-            }
-        }
-        System.out.println("Total parts loaded: " + parts.size());  // Debug output
+        List<String> lines = FileUtils.readFile(PART_FILE_PATH);
+        parts = lines.stream()
+                .map(this::deserializePart)
+                .collect(Collectors.toList());
     }
 
-    // Method to save parts back to the file
-    private void savePartsToFile() {
-        List<String> partData = new ArrayList<>();
-        for (AutoPart part : parts) {
-            partData.add(part.getPartID() + "|" + part.getPartName() + "|" + part.getManufacturer() + "|" + part.getCondition() + "|" + part.getWarranty() + "|" + part.getCost());
-        }
-        FileUtils.writeFile(PART_FILE_PATH, partData);
-    }
-
-    // CRUD
-    // Create: Add a new part
+    // Add a new part
     public void addPart(AutoPart part) {
         parts.add(part);
-        savePartsToFile();  // Save after adding
+        List<String> serializedParts = parts.stream()
+                .map(this::serializePart)
+                .collect(Collectors.toList());
+        FileUtils.writeFile(PART_FILE_PATH, serializedParts);
     }
 
-    // Update: Update an existing part by ID
-    public void updatePart(String partID, AutoPart updatedPart) {
-        AutoPart part = getPartByID(partID);
-        if (part != null) {
-            part.setPartName(updatedPart.getPartName());
-            part.setManufacturer(updatedPart.getManufacturer());
-            part.setCondition(updatedPart.getCondition());
-            part.setWarranty(updatedPart.getWarranty());
-            part.setCost(updatedPart.getCost());
-            savePartsToFile();  // Save after updating
+    // Remove a part
+    public void removePart(String partId) {
+        parts = parts.stream()
+                .filter(part -> !part.getPartID().equals(partId))
+                .collect(Collectors.toList());
+        List<String> serializedParts = parts.stream()
+                .map(this::serializePart)
+                .collect(Collectors.toList());
+        FileUtils.writeFile(PART_FILE_PATH, serializedParts);
+    }
+
+    // Update an existing part
+    public void updatePart(String partId, AutoPart updatedPart) {
+        for (int i = 0; i < parts.size(); i++) {
+            if (parts.get(i).getPartID().equals(partId)) {
+                parts.set(i, updatedPart);
+                break;
+            }
         }
-    }
-
-    // Delete: Remove a part by ID
-    public void deletePart(String partID) {
-        parts.removeIf(part -> part.getPartID().equals(partID));
-        savePartsToFile();  // Save after deleting
-    }
-
-    // Retrieve a part by ID (helper function)
-    public AutoPart getPartByID(String partID) {
-        return parts.stream().filter(part -> part.getPartID().equals(partID)).findFirst().orElse(null);
-    }
-
-    // Method to print all parts
-    public void printAllParts() {
-        parts.forEach(System.out::println);
-    }
-
-    // Manager queries
-    // Search parts by manufacturer
-    public List<AutoPart> searchPartsByManufacturer(String manufacturer) {
-        return parts.stream()
-                .filter(part -> part.getManufacturer().equalsIgnoreCase(manufacturer))
+        List<String> serializedParts = parts.stream()
+                .map(this::serializePart)
                 .collect(Collectors.toList());
+        FileUtils.writeFile(PART_FILE_PATH, serializedParts);
     }
-
-    // Search parts by condition
-    public List<AutoPart> searchPartsByCondition(String condition) {
-        return parts.stream()
-                .filter(part -> part.getCondition().equalsIgnoreCase(condition))
-                .collect(Collectors.toList());
-    }
-
-    // Search parts by price range
-    public List<AutoPart> searchPartsByPriceRange(double minPrice, double maxPrice) {
-        return parts.stream()
-                .filter(part -> part.getCost() >= minPrice && part.getCost() <= maxPrice)
-                .collect(Collectors.toList());
-    }
-
-    // Search parts by warranty duration
-    public List<AutoPart> searchPartsByWarranty(String warranty) {
-        return parts.stream()
-                .filter(part -> part.getWarranty().equalsIgnoreCase(warranty))
-                .collect(Collectors.toList());
-    }
-
-    // Count parts by condition
-    public long countPartsByCondition(String condition) {
-        return parts.stream()
-                .filter(part -> part.getCondition().equalsIgnoreCase(condition))
-                .count();
-    }
-
-    //
 }

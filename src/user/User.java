@@ -1,3 +1,5 @@
+package user;
+
 import java.util.Date;
 
 public abstract class User {
@@ -11,9 +13,8 @@ public abstract class User {
     protected String role; // Manager, Employee, Client
     protected String status; // Active/Inactive
 
-    //Constructor
-    public User(String userID, String username, String password, Date dateOfBirth, String address,
-                String phoneNumber, String email, String role, String status) {
+    // Constructor
+    public User(String userID, String username, String password, Date dateOfBirth, String address, String phoneNumber, String email, String role, String status) {
         this.userID = userID;
         this.username = username;
         this.password = password;
@@ -25,98 +26,16 @@ public abstract class User {
         this.status = status;
     }
 
-    //Getters and Setters
-
-    public String getUserID() {
-        return userID;
+    // Method to get the user ID
+    public String getUserId() {
+        return this.userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    // Method to set the user's active/inactive status
+    public void setActive(boolean isActive) {
+        this.status = isActive ? "Active" : "Inactive";
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUserType() {
-        return role;
-    }
-
-    public void setUserType(String userType) {
-        this.role = userType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    // toString method
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId='" + userID + '\'' +
-                ", fullName='" + username + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", role='" + role + '\'' +
-                ", status=" + status +
-                '}';
-    }
-
-    // Abstract methods
+    // Abstract login method to be implemented by subclasses
     public abstract boolean login(String username, String password);
-    public abstract void viewProfile();
-    public abstract void modifyProfile();
 }

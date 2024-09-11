@@ -1,8 +1,0 @@
-anhkit1 anhkit client
-anhkit2 anhkit employee
-anhkit3 anhkit manager
-john123 johnpass manager
-sarah98 sarah123 employee
-mike007 mike007 client
-janeDoe jane123 employee
-bobsmith bobpass customer
