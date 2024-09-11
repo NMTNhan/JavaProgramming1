@@ -16,6 +16,19 @@ public class TransactionManager {
     // List to hold all transactions
     private List<Transaction> transactions = new ArrayList<>();
 
+    // Method to process a new transaction
+    public void processTransaction(Transaction transaction, Client client) {
+        double amount = transaction.getAmount();
+        client.purchase(amount);  // <-- Apply discount and update spending
+        transactions.add(transaction);
+        saveTransactionsToFile();  // <-- Save transactions after processing
+    }
+
+    // Method to save transactions back to the file
+    private void saveTransactionsToFile() {
+        // Logic to save transactions
+    }
+
     // Constructor: Load transactions from file when the manager is initialized
     public TransactionManager() {
         loadTransactionsFromFile();

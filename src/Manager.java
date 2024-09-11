@@ -14,6 +14,18 @@ public class Manager extends User {
         // Logic to view cars, services, parts, etc.
     }
 
+    // View membership levels and discounts
+    public void viewMembershipDiscountPolicies() {
+        System.out.println("Silver: 5% discount for spending over 30 million VND");
+        System.out.println("Gold: 10% discount for spending over 100 million VND");
+        System.out.println("Platinum: 15% discount for spending over 250 million VND");
+    }
+
+    // Adjust membership policies (example)
+    public void adjustMembershipPolicy(String level, double newThreshold, double newDiscountRate) {
+        // Logic to adjust membership policies
+    }
+    
     // Perform statistics, such as sales, revenue, etc.
     public void performStatistics() {
         System.out.println("Performing statistics...");
@@ -24,6 +36,14 @@ public class Manager extends User {
     public void manageEmployees(List<Employee> employees) {
         System.out.println("Managing employees...");
         // Logic to manage employees (e.g., assigning tasks, reviewing performance, etc.)
+    }
+
+    // Transaction
+    public void manageEmployees(List<Employee> employees) {
+        System.out.println("Managing employees...");
+        // Logic to manage employees (e.g., assigning tasks, reviewing performance, etc.)
+        // Example: List all employees
+        employees.forEach(System.out::println);
     }
 
     @Override
