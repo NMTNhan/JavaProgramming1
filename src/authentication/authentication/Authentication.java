@@ -60,7 +60,7 @@ public class Authentication {
     private static void clientInterface() {
         System.out.println("Welcome to Client Interface!");
         // Implement customer-specific operations here
-        
+
     }
 
     // Method to log out
