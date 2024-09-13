@@ -1,0 +1,7 @@
+u009,manager,123,1985-01-01,123 Manager Blvd,555-0000,newmanager@mail.com,Manager,active
+u002,User2,password123,1992-06-10,123 Street 2,555-0002,user2@mail.com,Employee,active
+u001,User1,password123,1990-03-15,123 Street 1,555-0001,user1@mail.com,Client,active
+u006,client,123,1990-05-21,456 New Street,555-1234,newclient@mail.com,Client,active
+u007,salesperson,123,1993-04-10,789 Sales Street,555-5678,newsalesperson@mail.com,Employee,active
+u008,mechanic,123,1992-11-15,123 Mechanic Lane,555-9012,newmechanic@mail.com,Employee,active
+u003,User3,password123,1995-09-28,123 Street 3,555-0003,user3@mail.com,Employee,active

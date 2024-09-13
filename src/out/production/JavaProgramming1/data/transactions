@@ -1,0 +1,5 @@
+t001,2024-09-01,u001,s001,m001,c001;p001,0.05,50000.0,"First-time purchase"
+t002,2024-09-05,u002,s002,m002,c002;p002,0.10,60000.0,"Customer returned for service"
+t003,2024-09-10,u003,s003,m003,c003;p003,0.07,70000.0,"Promotional discount applied"
+t004,2024-09-12,u004,s004,m004,c004;p004,0.08,80000.0,"Transaction for two cars and parts"
+t005,2024-09-15,u005,s005,m005,c005;p005,0.15,90000.0,"No additional notes"

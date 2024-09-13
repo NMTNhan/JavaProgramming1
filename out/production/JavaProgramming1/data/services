@@ -1,0 +1,20 @@
+s001|2023-09-01|u001|m001|Brake Repair|p003;p004|1200.0|Updated after service
+s003|2023-09-10|u001|m003|Brake Repair|p003|200.0|No additional notes
+s004|2023-09-12|u002|m004|Oil Change|p004|100.0|No additional notes
+s005|2023-09-15|u001|m005|Transmission Repair|p005|1000.0|No additional notes
+s006|2023-09-18|u003|m006|Tire Rotation|p006|150.5|No additional notes
+s007|2023-09-20|u004|m007|Alignment|p007|120.75|No additional notes
+s008|2023-09-22|u005|m001|AC Repair|p008|200.0|No additional notes
+s009|2023-09-25|u006|m002|Battery Replacement|p009|180.0|No additional notes
+s010|2023-09-26|u007|m003|Brake Repair|p010|300.0|No additional notes
+s011|2023-09-28|u008|m004|Transmission Repair|p011|500.0|No additional notes
+s012|2023-09-29|u009|m005|Radiator Replacement|p012|600.0|No additional notes
+s013|2023-09-30|u010|m006|Oil Change|p013|80.0|No additional notes
+s014|2023-09-28|u011|m007|Engine Repair|p014|1500.0|No additional notes
+s015|2023-09-15|u012|m001|Car Repair|p015|1000.0|No additional notes
+s016|2023-09-17|u013|m002|Alignment|p016|120.0|No additional notes
+s017|2023-09-20|u014|m003|Tire Rotation|p017|160.0|No additional notes
+s018|2023-09-22|u015|m004|Battery Replacement|p018|200.0|No additional notes
+s019|2023-09-24|u016|m005|AC Repair|p019|500.0|No additional notes
+s020|2023-09-25|u017|m006|Brake Repair|p020|300.0|No additional notes
+s021|2024-09-12|u005|m005|Engine Repair|p001;p002|1500.0|No additional notes
