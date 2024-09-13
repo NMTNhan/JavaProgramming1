@@ -25,32 +25,42 @@ public class Main {
     private static Authentication authentication = new Authentication();
 
     public static void main(String[] args) {
-        boolean exit = false;
+        try {
+            boolean exit = false;
 
-        while (!exit) {
-            System.out.println("\nMain Menu:");
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("3. Exit");
+            while (!exit) {
+                try {
+                    System.out.println("\nMain Menu:");
+                    System.out.println("1. Login");
+                    System.out.println("2. Register");
+                    System.out.println("3. Exit");
 
-            System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+                    System.out.print("Choose an option: ");
+                    int choice = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
 
-            switch (choice) {
-                case 1:
-                    login();
-                    break;
-                case 2:
-                    register();
-                    break;
-                case 3:
-                    exit = true;
-                    System.out.println("Exiting the program. Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
+                    switch (choice) {
+                        case 1:
+                            login();
+                            break;
+                        case 2:
+                            register();
+                            break;
+                        case 3:
+                            exit = true;
+                            System.out.println("Exiting the program. Goodbye!");
+                            break;
+                        default:
+                            System.out.println("Invalid option. Please try again.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -70,85 +80,94 @@ public class Main {
         System.out.println("Please choose from the following options:");
     }
 
-
     private static void login() {
-        System.out.print("Enter username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
+        try {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
 
-        // Validate credentials with the Authentication class
-        if (authentication.login(username, password)) {
-            User loggedInUser = authentication.getLoggedInUser();
-            System.out.println("Login successful! Welcome, " + loggedInUser.getUsername() + ".");
+            // Validate credentials with the Authentication class
+            if (authentication.login(username, password)) {
+                User loggedInUser = authentication.getLoggedInUser();
+                System.out.println("Login successful! Welcome, " + loggedInUser.getUsername() + ".");
 
-            // Redirect to the appropriate menu based on role
-            switch (loggedInUser.getRole().toLowerCase()) {
-                case "manager":
-                    ManagerMenu managerMenu = new ManagerMenu(carManager, partManager, serviceManager, transactionManager, userManager, scanner);
-                    managerMenu.displayMenu();
-                    break;
-                case "employee":
-                    EmployeeMenu employeeMenu = new EmployeeMenu(transactionManager, scanner);
-                    employeeMenu.displayMenu();
-                    break;
-                case "client":
-                    ClientMenu clientMenu = new ClientMenu(carManager, partManager, serviceManager, transactionManager, scanner);
-                    clientMenu.displayMenu();
-                    break;
-                default:
-                    System.out.println("Invalid role. Access denied.");
-                    break;
+                // Redirect to the appropriate menu based on role
+                switch (loggedInUser.getRole().toLowerCase()) {
+                    case "manager":
+                        ManagerMenu managerMenu = new ManagerMenu(carManager, partManager, serviceManager, transactionManager, userManager, scanner);
+                        managerMenu.displayMenu();
+                        break;
+                    case "employee":
+                        EmployeeMenu employeeMenu = new EmployeeMenu(transactionManager, scanner);
+                        employeeMenu.displayMenu();
+                        break;
+                    case "client":
+                        ClientMenu clientMenu = new ClientMenu(carManager, partManager, serviceManager, transactionManager, scanner);
+                        clientMenu.displayMenu();
+                        break;
+                    default:
+                        System.out.println("Invalid role. Access denied.");
+                        break;
+                }
+            } else {
+                System.out.println("Login failed. Invalid credentials.");
             }
-        } else {
-            System.out.println("Login failed. Invalid credentials.");
+        } catch (Exception e) {
+            System.out.println("Error during login: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     private static void register() {
-        System.out.print("Enter a username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter a password: ");
-        String password = scanner.nextLine();
-        System.out.print("Enter your date of birth (yyyy-MM-dd): ");
-        LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine());
-        System.out.print("Enter your address: ");
-        String address = scanner.nextLine();
-        System.out.print("Enter your phone number: ");
-        String phoneNumber = scanner.nextLine();
-        System.out.print("Enter your email: ");
-        String email = scanner.nextLine();
-        System.out.print("Enter your status (Active/Inactive): ");
-        String status = scanner.nextLine();
-        System.out.print("Enter your role (manager, employee, client): ");
-        String role = scanner.nextLine().toLowerCase();
+        try {
+            System.out.print("Enter a username: ");
+            String username = scanner.nextLine();
+            System.out.print("Enter a password: ");
+            String password = scanner.nextLine();
+            System.out.print("Enter your date of birth (yyyy-MM-dd): ");
+            LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine());
+            System.out.print("Enter your address: ");
+            String address = scanner.nextLine();
+            System.out.print("Enter your phone number: ");
+            String phoneNumber = scanner.nextLine();
+            System.out.print("Enter your email: ");
+            String email = scanner.nextLine();
+            System.out.print("Enter your status (Active/Inactive): ");
+            String status = scanner.nextLine();
+            System.out.print("Enter your role (manager, employee, client): ");
+            String role = scanner.nextLine().toLowerCase();
 
-        // Generate a unique user ID
-        String userID = "user" + System.currentTimeMillis();
+            // Generate a unique user ID
+            String userID = "user" + System.currentTimeMillis();
 
-        // Create a new user based on the role
-        User newUser;
-        switch (role) {
-            case "manager":
-                newUser = new Manager(userID, username, password, dateOfBirth, address, phoneNumber, email, status);
-                break;
-            case "employee":
-                System.out.print("Enter job position: ");
-                String jobPosition = scanner.nextLine();
-                newUser = new Employee(userID, username, password, dateOfBirth, address, phoneNumber, email, status, jobPosition);
-                break;
-            case "client":
-                System.out.print("Enter membership level (Silver, Gold, Platinum): ");
-                String membershipLevel = scanner.nextLine();
-                newUser = new Client(userID, username, password, dateOfBirth, address, phoneNumber, email, status, membershipLevel);
-                break;
-            default:
-                System.out.println("Invalid role. Registration failed.");
-                return;
+            // Create a new user based on the role
+            User newUser;
+            switch (role) {
+                case "manager":
+                    newUser = new Manager(userID, username, password, dateOfBirth, address, phoneNumber, email, status);
+                    break;
+                case "employee":
+                    System.out.print("Enter job position: ");
+                    String jobPosition = scanner.nextLine();
+                    newUser = new Employee(userID, username, password, dateOfBirth, address, phoneNumber, email, status, jobPosition);
+                    break;
+                case "client":
+                    System.out.print("Enter membership level (Silver, Gold, Platinum): ");
+                    String membershipLevel = scanner.nextLine();
+                    newUser = new Client(userID, username, password, dateOfBirth, address, phoneNumber, email, status, membershipLevel);
+                    break;
+                default:
+                    System.out.println("Invalid role. Registration failed.");
+                    return;
+            }
+
+            // Register the new user using Authentication class
+            authentication.registerUser(newUser);
+            System.out.println("Registration successful! You can now log in.");
+        } catch (Exception e) {
+            System.out.println("Error during registration: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        // Register the new user using Authentication class
-        authentication.registerUser(newUser);
-        System.out.println("Registration successful! You can now log in.");
     }
 }
