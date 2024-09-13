@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    private static final String USER_FILE_PATH = "data/users";
+    private static final String USER_FILE_PATH = "src/data/users";
     private List<User> users = new ArrayList<>();
     public UserManager() {
         loadUsersFromFile();  // Load users when UserManager is instantiated

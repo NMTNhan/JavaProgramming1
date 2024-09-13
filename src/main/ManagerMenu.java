@@ -1,22 +1,18 @@
 package main;
 
+import main.CarCRUD;
+import main.PartCRUD;
+import main.ServiceCRUD;
 import managers.CarManager;
 import managers.AutoPartManager;
 import managers.ServiceManager;
 import managers.TransactionManager;
 import managers.UserManager;
-import main.CarCRUD;
-import main.PartCRUD;
-import main.ServiceCRUD;
-import models.AutoPart;
-import models.Car;
-import models.Service;
-import models.Transaction;
-import user.User;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 
 public class ManagerMenu {
 
@@ -45,17 +41,16 @@ public class ManagerMenu {
         this.serviceCRUD = new ServiceCRUD(serviceManager, scanner);
     }
 
+
     public void displayMenu() {
         boolean back = false;
 
         while (!back) {
             System.out.println("\nManager Menu:");
-            System.out.println("1. View all entities");
-            System.out.println("2. Search entities by ID");
-            System.out.println("3. Perform CRUD operations");
-            System.out.println("4. Calculate statistics");
-            System.out.println("5. List items");
-            System.out.println("6. Logout");
+            System.out.println("1. View/Search All Entities");
+            System.out.println("2. Perform Statistics Operations");
+            System.out.println("3. Perform CRUD Operations");
+            System.out.println("4. Logout");
 
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
@@ -63,21 +58,15 @@ public class ManagerMenu {
 
             switch (choice) {
                 case 1:
-                    viewAllEntities();
+                    viewOrSearchEntities();
                     break;
                 case 2:
-                    searchEntitiesById();
+                    calculateStatistics();
                     break;
                 case 3:
                     performCrudOperations();
                     break;
                 case 4:
-                    calculateStatistics();
-                    break;
-                case 5:
-                    listItems();
-                    break;
-                case 6:
                     back = true;
                     break;
                 default:
@@ -86,123 +75,125 @@ public class ManagerMenu {
         }
     }
 
-    private void viewAllEntities() {
-        System.out.println("View all entities:");
+    private void viewOrSearchEntities() {
+        System.out.println("\nView or Search Entities:");
         System.out.println("1. Cars");
         System.out.println("2. Parts");
         System.out.println("3. Services");
         System.out.println("4. Transactions");
         System.out.println("5. Users");
-
         System.out.print("Choose an option: ");
-        int choice = scanner.nextInt();
+        int entityChoice = scanner.nextInt();
         scanner.nextLine();  // Consume newline
 
-        switch (choice) {
+        switch (entityChoice) {
             case 1:
-                carManager.getAllCars();
+                carManager.getAllCars();  // View all cars
                 break;
             case 2:
-                partManager.getAllParts();
+                partManager.getAllParts();  // View all parts
                 break;
             case 3:
-                serviceManager.getAllServices();
+                serviceManager.getAllServices();  // View all services
                 break;
             case 4:
-                transactionManager.getAllTransactions();
+                transactionManager.getAllTransactions();  // View all transactions
                 break;
             case 5:
-                userManager.getAllUsers();
+                userManager.getAllUsers();  // View all users
                 break;
             default:
                 System.out.println("Invalid option. Please try again.");
         }
+
+        // Option to search entities by ID
+        System.out.print("Would you like to search for a specific entity by ID? (yes/no): ");
+        String searchOption = scanner.nextLine();
+        if (searchOption.equalsIgnoreCase("yes")) {
+            searchEntityById(entityChoice);
+        }
     }
 
-    public void searchEntitiesById() {
-        System.out.println("Search entities by ID:");
-        System.out.println("1. Cars");
-        System.out.println("2. Parts");
-        System.out.println("3. Services");
-        System.out.println("4. Transactions");
-        System.out.println("5. Users");
-
-        System.out.print("Choose an option: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
-
+    private void searchEntityById(int entityChoice) {
         System.out.print("Enter the ID: ");
         String id = scanner.nextLine();
 
-        switch (choice) {
-            case 1:  // Cars
-                Car car = carManager.findCarById(id);
+        switch (entityChoice) {
+            case 1:  // Search cars
+                var car = carManager.findCarById(id);
                 if (car != null) {
-                    System.out.println(car);  // Print car details
+                    System.out.println(car);
                 } else {
-                    System.out.println("Car with ID " + id + " not found.");
+                    System.out.println("Car not found.");
                 }
                 break;
-            case 2:  // Parts
-                AutoPart part = partManager.findPartById(id);
+            case 2:  // Search parts
+                var part = partManager.findPartById(id);
                 if (part != null) {
-                    System.out.println(part);  // Print part details
+                    System.out.println(part);
                 } else {
-                    System.out.println("Part with ID " + id + " not found.");
+                    System.out.println("Part not found.");
                 }
                 break;
-            case 3:  // Services
-                Service service = serviceManager.findServiceById(id);
+            case 3:  // Search services
+                var service = serviceManager.findServiceById(id);
                 if (service != null) {
-                    System.out.println(service);  // Print service details
+                    System.out.println(service);
                 } else {
-                    System.out.println("Service with ID " + id + " not found.");
+                    System.out.println("Service not found.");
                 }
                 break;
-            case 4:  // Transactions
-                Transaction transaction = transactionManager.findTransactionById(id);
+            case 4:  // Search transactions
+                var transaction = transactionManager.findTransactionById(id);
                 if (transaction != null) {
-                    System.out.println(transaction);  // Print transaction details
+                    System.out.println(transaction);
                 } else {
-                    System.out.println("Transaction with ID " + id + " not found.");
+                    System.out.println("Transaction not found.");
                 }
                 break;
-            case 5:  // Users
-                User user = userManager.findUserById(id);
+            case 5:  // Search users
+                var user = userManager.findUserById(id);
                 if (user != null) {
-                    System.out.println(user);  // Print user details
+                    System.out.println(user);
                 } else {
-                    System.out.println("User with ID " + id + " not found.");
+                    System.out.println("User not found.");
                 }
                 break;
             default:
-                System.out.println("Invalid option. Please try again.");
-                break;
+                System.out.println("Invalid entity choice.");
         }
     }
 
     private void performCrudOperations() {
-        System.out.println("CRUD operations:");
-        System.out.println("1. Cars");
-        System.out.println("2. Parts");
-        System.out.println("3. Services");
+        boolean back = false;
 
-        System.out.print("Choose an option: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        while (!back) {
+            System.out.println("\nCRUD Operations:");
+            System.out.println("1. Cars");
+            System.out.println("2. Parts");
+            System.out.println("3. Services");
+            System.out.println("4. Back");
 
-        switch (choice) {
-            case 1:
-                carCRUD.createCar();
-                break;
-            case 2:
-                partCRUD.createPart();
-                break;
-            case 3:
-                serviceCRUD.createService();
-                break;
-            default:
-                System.out.println("Invalid option. Please try again.");
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+
+            switch (choice) {
+                case 1:
+                    carCRUDMenu();
+                    break;
+                case 2:
+                    partCRUDMenu();
+                    break;
+                case 3:
+                    serviceCRUDMenu();
+                    break;
+                case 4:
+                    back = true;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
         }
     }
 
@@ -210,10 +201,12 @@ public class ManagerMenu {
         boolean back = false;
 
         while (!back) {
+            System.out.println("Car CRUD Menu:");
             System.out.println("1. Create car");
             System.out.println("2. Update car");
             System.out.println("3. Delete car");
             System.out.println("4. Return");
+
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
@@ -223,10 +216,14 @@ public class ManagerMenu {
                     carCRUD.createCar();
                     break;
                 case 2:
-                    carCRUD.updateCar();
+                    System.out.print("Enter the car ID to update: ");
+                    String carId = scanner.nextLine();
+                    carCRUD.updateCar(carId);
                     break;
                 case 3:
-                    carCRUD.deleteCar();
+                    System.out.print("Enter the car ID to delete: ");
+                    carId = scanner.nextLine();
+                    carCRUD.deleteCar(carId);
                     break;
                 case 4:
                     back = true;
@@ -241,10 +238,12 @@ public class ManagerMenu {
         boolean back = false;
 
         while (!back) {
+            System.out.println("Part CRUD Menu:");
             System.out.println("1. Create part");
             System.out.println("2. Update part");
             System.out.println("3. Delete part");
             System.out.println("4. Return");
+
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
@@ -254,10 +253,14 @@ public class ManagerMenu {
                     partCRUD.createPart();
                     break;
                 case 2:
-                    partCRUD.updatePart();
+                    System.out.print("Enter the part ID to update: ");
+                    String partId = scanner.nextLine();
+                    partCRUD.updatePart(partId);
                     break;
                 case 3:
-                    partCRUD.deletePart();
+                    System.out.print("Enter the part ID to delete: ");
+                    partId = scanner.nextLine();
+                    partCRUD.deletePart(partId);
                     break;
                 case 4:
                     back = true;
@@ -272,10 +275,12 @@ public class ManagerMenu {
         boolean back = false;
 
         while (!back) {
+            System.out.println("Service CRUD Menu:");
             System.out.println("1. Create service");
             System.out.println("2. Update service");
             System.out.println("3. Delete service");
             System.out.println("4. Return");
+
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
@@ -285,10 +290,14 @@ public class ManagerMenu {
                     serviceCRUD.createService();
                     break;
                 case 2:
-                    serviceCRUD.updateService();
+                    System.out.print("Enter the service ID to update: ");
+                    String serviceId = scanner.nextLine();
+                    serviceCRUD.updateService(serviceId);
                     break;
                 case 3:
-                    serviceCRUD.deleteService();
+                    System.out.print("Enter the service ID to delete: ");
+                    serviceId = scanner.nextLine();
+                    serviceCRUD.deleteService(serviceId);
                     break;
                 case 4:
                     back = true;
@@ -299,16 +308,17 @@ public class ManagerMenu {
         }
     }
 
+
     private void calculateStatistics() {
         boolean back = false;
 
         while (!back) {
-            System.out.println("Calculate statistics:");
-            System.out.println("1. Number of cars sold in a month");
-            System.out.println("2. Revenue in a time period");
-            System.out.println("3. Services done by a mechanic");
-            System.out.println("4. Revenue of cars sold by a salesperson");
-            System.out.println("5. Return");
+            System.out.println("\nStatistics Menu:");
+            System.out.println("1. Calculate number of cars sold in a month");
+            System.out.println("2. Calculate revenue in a time period");
+            System.out.println("3. Calculate revenue of services by a mechanic");
+            System.out.println("4. Calculate revenue of cars sold by a salesperson");
+            System.out.println("5. Return to main menu");
 
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
@@ -316,27 +326,16 @@ public class ManagerMenu {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Enter month (1-12): ");
-                    int month = scanner.nextInt();
-                    System.out.print("Enter year: ");
-                    int year = scanner.nextInt();
-                    transactionManager.calculateCarsSoldInMonth(month, year);
+                    calculateCarsSoldInMonth();
                     break;
                 case 2:
-                    LocalDate[] dateRange = promptForDateRange();
-                    transactionManager.calculateRevenue(dateRange[0], dateRange[1]);
+                    calculateRevenueInTimePeriod();
                     break;
                 case 3:
-                    System.out.print("Enter mechanic ID: ");
-                    String mechanicId = scanner.nextLine();
-                    dateRange = promptForDateRange();
-                    transactionManager.calculateMechanicRevenue(mechanicId, dateRange[0], dateRange[1]);
+                    calculateMechanicRevenue();
                     break;
                 case 4:
-                    System.out.print("Enter salesperson ID: ");
-                    String salespersonId = scanner.nextLine();
-                    dateRange = promptForDateRange();
-                    transactionManager.calculateSalespersonRevenue(salespersonId, dateRange[0], dateRange[1]);
+                    calculateSalespersonRevenue();
                     break;
                 case 5:
                     back = true;
@@ -346,6 +345,60 @@ public class ManagerMenu {
             }
         }
     }
+
+    private void calculateCarsSoldInMonth() {
+        System.out.print("Enter the month (1-12): ");
+        int month = scanner.nextInt();
+        System.out.print("Enter the year: ");
+        int year = scanner.nextInt();
+
+        long carsSold = transactionManager.calculateCarsSoldInMonth(month, year);  // Return type is now long
+        System.out.println("Number of cars sold in " + month + "/" + year + ": " + carsSold);
+    }
+
+
+
+    private void calculateRevenueInTimePeriod() {
+        System.out.println("Enter the start date (yyyy-MM-dd): ");
+        LocalDate startDate = LocalDate.parse(scanner.nextLine());
+
+        System.out.println("Enter the end date (yyyy-MM-dd): ");
+        LocalDate endDate = LocalDate.parse(scanner.nextLine());
+
+        double revenue = transactionManager.calculateRevenue(startDate, endDate);
+        System.out.println("Total revenue from " + startDate + " to " + endDate + ": $" + revenue);
+    }
+
+
+    private void calculateMechanicRevenue() {
+        System.out.print("Enter mechanic ID: ");
+        String mechanicID = scanner.nextLine();
+
+        System.out.println("Enter the start date (yyyy-MM-dd): ");
+        LocalDate startDate = LocalDate.parse(scanner.nextLine());
+
+        System.out.println("Enter the end date (yyyy-MM-dd): ");
+        LocalDate endDate = LocalDate.parse(scanner.nextLine());
+
+        double revenue = transactionManager.calculateMechanicRevenue(mechanicID, startDate, endDate);
+        System.out.println("Total revenue from services by mechanic " + mechanicID + ": $" + revenue);
+    }
+
+
+    private void calculateSalespersonRevenue() {
+        System.out.print("Enter salesperson ID: ");
+        String salespersonID = scanner.nextLine();
+
+        System.out.println("Enter the start date (yyyy-MM-dd): ");
+        LocalDate startDate = LocalDate.parse(scanner.nextLine());
+
+        System.out.println("Enter the end date (yyyy-MM-dd): ");
+        LocalDate endDate = LocalDate.parse(scanner.nextLine());
+
+        double revenue = transactionManager.calculateSalespersonRevenue(salespersonID, startDate, endDate);
+        System.out.println("Total revenue from cars sold by " + salespersonID + ": $" + revenue);
+    }
+
 
     private LocalDate[] promptForDateRange() {
         System.out.print("Enter start date (yyyy-MM-dd): ");
@@ -356,45 +409,6 @@ public class ManagerMenu {
         String endDateInput = scanner.nextLine();
         LocalDate endDate = LocalDate.parse(endDateInput, DateTimeFormatter.ISO_LOCAL_DATE);
 
-        return new LocalDate[] { startDate, endDate };
-    }
-
-    private void listItems() {
-        boolean back = false;
-
-        while (!back) {
-            System.out.println("List items:");
-            System.out.println("1. Cars sold");
-            System.out.println("2. Transactions");
-            System.out.println("3. Services");
-            System.out.println("4. Parts sold");
-            System.out.println("5. Return");
-
-            System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
-
-            LocalDate[] dateRange = promptForDateRange();
-
-            switch (choice) {
-                case 1:
-                    transactionManager.listCarsSold(dateRange[0], dateRange[1]);
-                    break;
-                case 2:
-                    transactionManager.listTransactions(dateRange[0], dateRange[1]);
-                    break;
-                case 3:
-                    transactionManager.listServicesPerformed(dateRange[0], dateRange[1]);
-                    break;
-                case 4:
-                    transactionManager.listAutoPartsSold(dateRange[0], dateRange[1]);
-                    break;
-                case 5:
-                    back = true;
-                    break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
-            }
-        }
+        return new LocalDate[]{startDate, endDate};
     }
 }

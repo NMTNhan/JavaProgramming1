@@ -1,12 +1,9 @@
 package user;
 
-import managers.TransactionManager;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Employee extends User {
-    protected String jobPosition; // Salesperson or Mechanic
+    private String jobPosition;
 
     public Employee(String userID, String username, String password, LocalDate dateOfBirth, String address,
                     String phoneNumber, String email, String status, String jobPosition) {
@@ -21,5 +18,4 @@ public class Employee extends User {
     public void setJobPosition(String jobPosition) {
         this.jobPosition = jobPosition;
     }
-
 }

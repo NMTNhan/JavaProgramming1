@@ -49,18 +49,22 @@ public class EmployeeMenu {
 
     private void calculateRevenue() {
         LocalDate[] dateRange = promptForDateRange();
-        transactionManager.calculateRevenue(dateRange[0], dateRange[1]);
+        double revenue = transactionManager.calculateRevenue(dateRange[0], dateRange[1]);
+        System.out.println("Revenue between " + dateRange[0] + " and " + dateRange[1] + ": $" + revenue);
     }
 
     private void listCarsSold() {
         LocalDate[] dateRange = promptForDateRange();
+        System.out.println("Cars sold between " + dateRange[0] + " and " + dateRange[1] + ":");
         transactionManager.listCarsSold(dateRange[0], dateRange[1]);
     }
 
     private void listServicesSold() {
         LocalDate[] dateRange = promptForDateRange();
+        System.out.println("Services performed between " + dateRange[0] + " and " + dateRange[1] + ":");
         transactionManager.listServicesPerformed(dateRange[0], dateRange[1]);
     }
+
 
     private LocalDate[] promptForDateRange() {
         System.out.print("Enter start date (yyyy-MM-dd): ");

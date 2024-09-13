@@ -9,10 +9,11 @@ import java.util.*;
 public class Authentication {
     private Map<String, User> userDatabase = new HashMap<>();
     private User loggedInUser = null;
-    private static final String ACCOUNT_FILE = "data/users"; // Correct CSV file path
+    private static final String ACCOUNT_FILE = "src/data/users"; // Correct CSV file path
 
     public Authentication() {
-        loadUsersFromFile();
+        loadUsersFromFile();  // Debugging to check if the users are being loaded
+        System.out.println("DEBUG: Users loaded: " + userDatabase.size());
     }
 
     // Load users from file
@@ -45,22 +46,56 @@ public class Authentication {
             } else if (role.equalsIgnoreCase("manager")) {
                 user = new Manager(userID, username, password, dateOfBirth, address, phoneNumber, email, status);
             } else if (role.equalsIgnoreCase("employee")) {
-                // Assign job position (either "salesperson" or "mechanic" depending on data)
                 String jobPosition = userData.length == 10 ? userData[9] : "unknown";
                 user = new Employee(userID, username, password, dateOfBirth, address, phoneNumber, email, status, jobPosition);
             }
 
             if (user != null) {
-                userDatabase.put(username, user);  // Store the user in the map based on their username
+                userDatabase.put(username, user);
             }
         }
     }
 
+    // Method to generate new user ID (e.g., u001, u002)
+    private String generateNewUserID() {
+        int maxID = 0;
+        for (User user : userDatabase.values()) {
+            String userID = user.getUserId();
+            if (userID.startsWith("u")) {
+                try {
+                    int idNumber = Integer.parseInt(userID.substring(1)); // Get number part
+                    if (idNumber > maxID) {
+                        maxID = idNumber;
+                    }
+                } catch (NumberFormatException e) {
+                    // Ignore any non-numeric IDs
+                }
+            }
+        }
+        return String.format("u%03d", maxID + 1); // Generate next ID in the format u001, u002, etc.
+    }
 
+    // Login method
+    public boolean login(String username, String password) {
+        for (User user : userDatabase.values()) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                loggedInUser = user;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public User getLoggedInUser() {
+        return loggedInUser;
+    }
 
     // Register new user
     public void registerUser(User newUser) {
-        if (!userDatabase.containsKey(newUser.getUsername())) {  // Use username as key
+        String newUserID = generateNewUserID(); // Generate the correct ID
+        newUser.setUserId(newUserID); // Set the generated ID to the new user
+
+        if (!userDatabase.containsKey(newUser.getUsername())) {
             userDatabase.put(newUser.getUsername(), newUser);
             saveUsersToFile();  // Save the new user to the file
             System.out.println("User " + newUser.getUsername() + " registered successfully.");
@@ -68,23 +103,6 @@ public class Authentication {
             System.out.println("User with username " + newUser.getUsername() + " already exists.");
         }
     }
-
-
-    // Login method
-    public boolean login(String username, String password) {
-        for (User user : userDatabase.values()) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                loggedInUser = user;  // Set the logged-in user
-                return true;  // Login successful
-            }
-        }
-        return false;  // Login failed
-    }
-
-    public User getLoggedInUser() {
-        return loggedInUser;
-    }
-
 
     // Save users to the file
     private void saveUsersToFile() {
@@ -94,15 +112,5 @@ public class Authentication {
                     + "," + user.getAddress() + "," + user.getPhoneNumber() + "," + user.getEmail() + "," + user.getRole() + "," + user.getStatus());
         }
         FileUtils.writeFile(ACCOUNT_FILE, lines);
-    }
-
-    // Logout method
-    public void logout() {
-        if (loggedInUser != null) {
-            System.out.println("User " + loggedInUser.getUsername() + " logged out.");
-            loggedInUser = null;
-        } else {
-            System.out.println("No user is currently logged in.");
-        }
     }
 }

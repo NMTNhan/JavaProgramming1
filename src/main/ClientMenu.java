@@ -3,11 +3,16 @@ package main;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+
 import managers.CarManager;
 import managers.AutoPartManager;
 import managers.ServiceManager;
 import managers.TransactionManager;
 import models.Transaction;
+import models.Car;
+import models.AutoPart;
+import models.Service;
+import utils.ActivityLogManager;
 
 public class ClientMenu {
     private CarManager carManager;
@@ -64,12 +69,14 @@ public class ClientMenu {
         System.out.print("Select a car by ID: ");
         String carID = scanner.nextLine();
 
-        if (carManager.findCarById(carID) != null) {
+        Car selectedCar = carManager.findCarById(carID);
+        if (selectedCar != null) {
             System.out.println("Thank you for your patronage!");
-            createTransaction(carID);
+            createTransaction(carID, selectedCar.getPrice(), "Car");
         } else {
             System.out.println("Invalid Car ID. Please try again.");
         }
+        ActivityLogManager.logActivity("View Cars");
     }
 
     private void viewServices() {
@@ -78,12 +85,14 @@ public class ClientMenu {
         System.out.print("Select a service by ID: ");
         String serviceID = scanner.nextLine();
 
-        if (serviceManager.findServiceById(serviceID) != null) {
+        Service selectedService = serviceManager.findServiceById(serviceID);
+        if (selectedService != null) {
             System.out.println("Thank you for your patronage!");
-            createTransaction(serviceID);
+            createTransaction(serviceID, selectedService.getServiceCost(), "Service");
         } else {
             System.out.println("Invalid Service ID. Please try again.");
         }
+        ActivityLogManager.logActivity("Transaction Created");
     }
 
     private void viewParts() {
@@ -92,31 +101,49 @@ public class ClientMenu {
         System.out.print("Select a part by ID: ");
         String partID = scanner.nextLine();
 
-        if (partManager.findPartById(partID) != null) {
+        AutoPart selectedPart = partManager.findPartById(partID);
+        if (selectedPart != null) {
             System.out.println("Thank you for your patronage!");
-            createTransaction(partID);
+            createTransaction(partID, selectedPart.getCost(), "Part");
         } else {
             System.out.println("Invalid Part ID. Please try again.");
         }
     }
 
-    private void createTransaction(String itemID) {
+    private void createTransaction(String itemID, double totalAmount, String itemType) {
         // Create a new transaction for the selected item (car/part/service)
         LocalDate transactionDate = LocalDate.now();
-        String clientID = "client001";  // For demonstration purposes, using a static client ID
-        String salespersonID = "sales001";  // For demo purposes, use static salesperson ID
-        String mechanicID = "";  // Use empty or assign a mechanic if needed
-        List<String> purchasedItems = List.of(itemID);  // Adding the item to the purchase list
-        double discount = 0.0;  // Assuming no discount
-        double totalAmount = 1000.0;  // Example total amount (replace with actual logic)
+
+        // Dynamically obtain the client ID (for example, from a logged-in client session)
+        System.out.print("Enter your client ID: ");
+        String clientID = scanner.nextLine();
+
+        String salespersonID = null;
+        String mechanicID = null;
+
+        // If purchasing a car, assign a salesperson
+        if (itemType.equals("Car")) {
+            System.out.print("Enter salesperson ID: ");
+            salespersonID = scanner.nextLine();
+        }
+        // If purchasing a service, assign a mechanic
+        else if (itemType.equals("Service")) {
+            System.out.print("Enter mechanic ID: ");
+            mechanicID = scanner.nextLine();
+        }
+
+        // Create a transaction with the dynamically generated ID
+        String transactionID = transactionManager.generateTransactionID();
+
+        // No discount assumed for now, additional notes added
+        double discount = 0.0;
         String additionalNotes = "Thank you for your purchase!";
 
         // Create the new transaction with the required fields
-        Transaction newTransaction = new Transaction("T123", transactionDate, clientID, salespersonID, mechanicID,
-                purchasedItems, discount, totalAmount, additionalNotes);
+        Transaction newTransaction = new Transaction(transactionID, transactionDate, clientID, salespersonID, mechanicID,
+                List.of(itemID), discount, totalAmount, additionalNotes);
 
         transactionManager.addTransaction(newTransaction);  // Save the new transaction
         System.out.println("Transaction has been successfully created.");
     }
-
 }

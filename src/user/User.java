@@ -85,18 +85,15 @@ public abstract class User implements IUser {  // Implement IUser here
         this.status = isActive ? "Active" : "Inactive";
     }
 
-
     public String getUserType() {
         return this.role;  // Assuming `userType` is a field in `User`
     }
-
 
     // This method remains abstract to be implemented by subclasses
     @Override
     public boolean login(String username, String password) {
         return this.username.equals(username) && this.password.equals(password);
     }
-
 
     // Optional: toString() for better debugging/logging
     @Override

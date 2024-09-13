@@ -3,13 +3,9 @@ package main;
 import managers.ServiceManager;
 import models.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ServiceCRUD {
-
     private ServiceManager serviceManager;
     private Scanner scanner;
 
@@ -19,63 +15,50 @@ public class ServiceCRUD {
     }
 
     public void createService() {
-        System.out.print("Enter service ID: ");
-        String serviceID = scanner.nextLine();
-        System.out.print("Enter client ID: ");
-        String clientID = scanner.nextLine();
-        System.out.print("Enter mechanic ID: ");
-        String mechanicID = scanner.nextLine();
         System.out.print("Enter service type: ");
         String serviceType = scanner.nextLine();
+        System.out.print("Enter mechanic ID: ");
+        String mechanicID = scanner.nextLine();
+        System.out.print("Enter client ID: ");
+        String clientID = scanner.nextLine();
         System.out.print("Enter service cost: ");
         double serviceCost = scanner.nextDouble();
         scanner.nextLine();  // Consume newline
 
-        // Assuming the service date is today and replacedParts and additionalNotes are empty for now
-        LocalDate serviceDate = LocalDate.now();
-        List<String> replacedParts = new ArrayList<>();
-        String additionalNotes = "";
+        Service service = new Service(serviceManager.generateServiceID(), java.time.LocalDate.now(), clientID, mechanicID, serviceType, null, serviceCost, "");
+        serviceManager.addService(service);
+        System.out.println("Service added successfully!");
+    }
 
-        // Create a new Service object with all required parameters
-        Service newService = new Service(serviceID, serviceDate, clientID, mechanicID, serviceType, replacedParts, serviceCost, additionalNotes);
+    public void updateService(String serviceID) {
+        Service service = serviceManager.findServiceById(serviceID);
+        if (service != null) {
+            System.out.print("Update service type (" + service.getServiceType() + "): ");
+            String serviceType = scanner.nextLine();
+            System.out.print("Update mechanic ID (" + service.getMechanicID() + "): ");
+            String mechanicID = scanner.nextLine();
+            System.out.print("Update client ID (" + service.getClientID() + "): ");
+            String clientID = scanner.nextLine();
+            System.out.print("Update service cost (" + service.getServiceCost() + "): ");
+            double serviceCost = scanner.nextDouble();
+            scanner.nextLine(); // Consume newline
 
-        serviceManager.addService(newService);
-        System.out.println("Service created successfully.");
+            service.setServiceType(serviceType);
+            service.setMechanicID(mechanicID);
+            service.setClientID(clientID);
+            service.setServiceCost(serviceCost);
+
+            serviceManager.updateService(serviceID, service);
+            System.out.println("Service updated successfully!");
+        } else {
+            System.out.println("Service with ID " + serviceID + " not found.");
+        }
     }
 
 
-    public void updateService() {
-        System.out.print("Enter service ID to update: ");
-        String serviceID = scanner.nextLine();
 
-        Service service = serviceManager.findServiceById(serviceID);
-        if (service == null) {
-            System.out.println("Service not found.");
-            return;
-        }
-
-        System.out.print("Enter new name: ");
-        String newName = scanner.nextLine();
-        System.out.print("Enter new price: ");
-        double newPrice = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
-
-        service.setServiceType(newName);
-        service.setServiceCost(newPrice);
-        System.out.println("Service updated successfully.");
-    }
-
-    public void deleteService() {
-        System.out.print("Enter service ID to delete: ");
-        String serviceID = scanner.nextLine();
-
-        Service service = serviceManager.findServiceById(serviceID);
-        if (service == null) {
-            System.out.println("Service not found.");
-            return;
-        }
-
+    public void deleteService(String serviceID) {
         serviceManager.removeService(serviceID);
-        System.out.println("Service deleted successfully.");
+        System.out.println("Service deleted successfully!");
     }
 }

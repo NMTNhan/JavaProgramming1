@@ -6,7 +6,6 @@ import user.Client;
 import user.Employee;
 import user.Manager;
 import user.User;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -14,48 +13,46 @@ public class Main {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    // Initialize manager objects
-    private static CarManager carManager = new CarManager();
-    private static AutoPartManager partManager = new AutoPartManager();
-    private static ServiceManager serviceManager = new ServiceManager();
-    private static TransactionManager transactionManager = new TransactionManager();
-    private static UserManager userManager = new UserManager();
+    // Manager objects
+    private static CarManager carManager;
+    private static AutoPartManager partManager;
+    private static ServiceManager serviceManager;
+    private static TransactionManager transactionManager;
+    private static UserManager userManager;
 
-    // Authentication instance
-    private static Authentication authentication = new Authentication();
+    private static Authentication authentication;  // Declare but don’t initialize
 
     public static void main(String[] args) {
         try {
+            // Initialize the authentication system here, after the program has fully started
+            authentication = new Authentication();
+            initializeManagersAndAuthentication();  // Initialize the managers
+
             boolean exit = false;
 
             while (!exit) {
-                try {
-                    System.out.println("\nMain Menu:");
-                    System.out.println("1. Login");
-                    System.out.println("2. Register");
-                    System.out.println("3. Exit");
+                System.out.println("\nMain Menu:");
+                System.out.println("1. Login");
+                System.out.println("2. Register");
+                System.out.println("3. Exit");
 
-                    System.out.print("Choose an option: ");
-                    int choice = scanner.nextInt();
-                    scanner.nextLine();  // Consume newline
+                System.out.print("Choose an option: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine();  // Consume newline
 
-                    switch (choice) {
-                        case 1:
-                            login();
-                            break;
-                        case 2:
-                            register();
-                            break;
-                        case 3:
-                            exit = true;
-                            System.out.println("Exiting the program. Goodbye!");
-                            break;
-                        default:
-                            System.out.println("Invalid option. Please try again.");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
-                    e.printStackTrace();
+                switch (choice) {
+                    case 1:
+                        login();
+                        break;
+                    case 2:
+                        register();
+                        break;
+                    case 3:
+                        exit = true;
+                        System.out.println("Exiting the program. Goodbye!");
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
                 }
             }
         } catch (Exception e) {
@@ -64,20 +61,21 @@ public class Main {
         }
     }
 
-    private static void displayWelcomeScreen() {
-        System.out.println("*************************************");
-        System.out.println("COSC2081 GROUP ASSIGNMENT");
-        System.out.println("AUTO168 CAR DEALERSHIP MANAGEMENT SYSTEM");
-        System.out.println("Instructor: Mr. Minh Vu & Mr. Dung Nguyen");
-        System.out.println("Group: Please give us HD");
-        System.out.println("s3965654, Le Tuan Kiet\n");
-        System.out.println("s3935748, Tran Nguyen Khang\n");
-        System.out.println("s3992133, Lu Duc Thinh\n");
-        System.out.println("s3924462, Nguyen Minh Trong Nhan\n");
-        System.out.println("*************************************\n");
 
-        System.out.println("Welcome to the Auto136 Car Dealership Management System!");
-        System.out.println("Please choose from the following options:");
+    // Initialize managers and authentication
+    private static void initializeManagersAndAuthentication() {
+        try {
+            carManager = new CarManager();
+            partManager = new AutoPartManager();
+            serviceManager = new ServiceManager();
+            transactionManager = new TransactionManager();
+            userManager = new UserManager();
+            authentication = new Authentication();
+            System.out.println("Managers and Authentication initialized.");
+        } catch (Exception e) {
+            System.out.println("Error initializing managers or authentication: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private static void login() {
@@ -135,7 +133,7 @@ public class Main {
             String email = scanner.nextLine();
             System.out.print("Enter your status (Active/Inactive): ");
             String status = scanner.nextLine();
-            System.out.print("Enter your role (manager, employee, client): ");
+            System.out.print("Enter your role (employee, client): ");
             String role = scanner.nextLine().toLowerCase();
 
             // Generate a unique user ID
@@ -144,18 +142,13 @@ public class Main {
             // Create a new user based on the role
             User newUser;
             switch (role) {
-                case "manager":
-                    newUser = new Manager(userID, username, password, dateOfBirth, address, phoneNumber, email, status);
-                    break;
                 case "employee":
-                    System.out.print("Enter job position: ");
+                    System.out.print("Enter job position (mechanic, salesperson): ");
                     String jobPosition = scanner.nextLine();
                     newUser = new Employee(userID, username, password, dateOfBirth, address, phoneNumber, email, status, jobPosition);
                     break;
                 case "client":
-                    System.out.print("Enter membership level (Silver, Gold, Platinum): ");
-                    String membershipLevel = scanner.nextLine();
-                    newUser = new Client(userID, username, password, dateOfBirth, address, phoneNumber, email, status, membershipLevel);
+                    newUser = new Client(userID, username, password, dateOfBirth, address, phoneNumber, email, status, "Silver");
                     break;
                 default:
                     System.out.println("Invalid role. Registration failed.");

@@ -3,22 +3,30 @@ package managers;
 import models.Car;
 import utils.FileUtils;
 
+import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class CarManager {
 
     // File path for the cars data file
-    private static final String CAR_FILE_PATH = "data/cars";
+    private static final String CAR_FILE_PATH = "src/data/cars";
 
     // List to hold all cars
     private List<Car> cars = new ArrayList<>();
+    private int nextCarID = 1;
 
     // Constructor: Load cars from file when the manager is initialized
     public CarManager() {
-        loadCarsFromFile();  // Ensure cars are loaded on initialization
+        File carFile = new File(CAR_FILE_PATH);
+        if (!carFile.exists()) {
+            System.out.println("Car file not found. Creating a new one.");
+            FileUtils.writeFile(CAR_FILE_PATH, new ArrayList<>());  // Create an empty file
+        } else {
+            loadCarsFromFile();
+        }
     }
 
     // Convert string line from file to a Car object
@@ -52,11 +60,13 @@ public class CarManager {
 
     // Convert a Car object to string for writing to file
     private String serializeCar(Car car) {
-        String serviceIDs = String.join(";", car.getHistoryServices());
+        List<String> historyServices = car.getHistoryServices();
+        String serviceIDs = (historyServices != null) ? String.join(";", historyServices) : ""; // Handle null historyServices
         return car.getCarID() + "," + car.getMake() + "," + car.getModel() + "," + car.getYear() + ","
                 + car.getMileage() + "," + car.getColor() + "," + car.getStatus() + "," + car.getPrice() + ","
                 + serviceIDs + "," + car.getAdditionalNotes();
     }
+
 
     // Load cars from file
     private void loadCarsFromFile() {
@@ -70,54 +80,55 @@ public class CarManager {
         System.out.println("Cars loaded: " + cars.size());
     }
 
-    // Add a new car
+    // **CRUD: Create a new car**
     public void addCar(Car car) {
         cars.add(car);
-        List<String> serializedCars = cars.stream()
-                .map(this::serializeCar)
-                .collect(Collectors.toList());
-        FileUtils.writeFile(CAR_FILE_PATH, serializedCars);
+        saveCarsToFile(); // Save the updated list to the file
+        System.out.println("Car added: " + car);
     }
 
-    // Remove a car
-    public void removeCar(String carId) {
-        cars = cars.stream()
-                .filter(car -> !car.getCarID().equals(carId))
-                .collect(Collectors.toList());
-        List<String> serializedCars = cars.stream()
-                .map(this::serializeCar)
-                .collect(Collectors.toList());
-        FileUtils.writeFile(CAR_FILE_PATH, serializedCars);
-    }
-
-    // Update an existing car
-    public void updateCar(String carId, Car updatedCar) {
-        for (int i = 0; i < cars.size(); i++) {
-            if (cars.get(i).getCarID().equals(carId)) {
-                cars.set(i, updatedCar);
-                break;
-            }
-        }
-        List<String> serializedCars = cars.stream()
-                .map(this::serializeCar)
-                .collect(Collectors.toList());
-        FileUtils.writeFile(CAR_FILE_PATH, serializedCars);
-    }
-
-    // Find a car by its ID and return the car object (not void)
+    // **CRUD: Read (Find) a car by ID**
     public Car findCarById(String carId) {
         System.out.println("Searching for car ID: " + carId.trim());  // Debugging line
         for (Car car : cars) {
             System.out.println("Comparing with car ID: " + car.getCarID().trim());  // Debugging line
             if (car.getCarID().trim().equalsIgnoreCase(carId.trim())) {
-                return car;  // Return the car if found
+                System.out.println("Car found: " + car);  // Debugging line
+                return car;
             }
         }
-        return null;  // Return null if no car is found
+        System.out.println("Car not found: " + carId);
+        return null;
     }
 
+    // **CRUD: Update an existing car**
+    public void updateCar(String carId, Car updatedCar) {
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars.get(i).getCarID().equals(carId)) {
+                cars.set(i, updatedCar);
+                System.out.println("Car updated: " + updatedCar);
+                break;
+            }
+        }
+        saveCarsToFile(); // Save the updated list to the file
+    }
 
+    // **CRUD: Delete a car**
+    public void removeCar(String carId) {
+        cars = cars.stream()
+                .filter(car -> !car.getCarID().equals(carId))
+                .collect(Collectors.toList());
+        saveCarsToFile(); // Save the updated list to the file
+        System.out.println("Car removed with ID: " + carId);
+    }
 
+    // Save the list of cars to the file
+    private void saveCarsToFile() {
+        List<String> serializedCars = cars.stream()
+                .map(this::serializeCar)
+                .collect(Collectors.toList());
+        FileUtils.writeFile(CAR_FILE_PATH, serializedCars);
+    }
 
     // Get all cars
     public void getAllCars() {
@@ -130,4 +141,10 @@ public class CarManager {
         }
     }
 
+    // Method to generate the next car ID
+    public String generateCarID() {
+        String carID = "c" + String.format("%03d", nextCarID);
+        nextCarID++;
+        return carID;
+    }
 }

@@ -6,7 +6,6 @@ import models.AutoPart;
 import java.util.Scanner;
 
 public class PartCRUD {
-
     private AutoPartManager partManager;
     private Scanner scanner;
 
@@ -16,83 +15,58 @@ public class PartCRUD {
     }
 
     public void createPart() {
-        System.out.print("Enter part ID: ");
-        String partID = scanner.nextLine();
         System.out.print("Enter part name: ");
         String partName = scanner.nextLine();
-        System.out.print("Enter part manufacturer: ");
+        System.out.print("Enter manufacturer: ");
         String manufacturer = scanner.nextLine();
         System.out.print("Enter part number: ");
         String partNumber = scanner.nextLine();
-        System.out.print("Enter part condition (e.g., new/used): ");
+        System.out.print("Enter condition: ");
         String condition = scanner.nextLine();
-        System.out.print("Enter part warranty: ");
+        System.out.print("Enter warranty: ");
         String warranty = scanner.nextLine();
-        System.out.print("Enter part cost: ");
+        System.out.print("Enter cost: ");
         double cost = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
-        System.out.print("Enter additional notes: ");
-        String additionalNotes = scanner.nextLine();
+        scanner.nextLine(); // Consume newline
 
-        // Create a new AutoPart object with all required parameters
-        AutoPart newPart = new AutoPart(partID, partName, manufacturer, partNumber, condition, warranty, cost, additionalNotes);
-
-        partManager.addPart(newPart);
-        System.out.println("Part created successfully.");
+        AutoPart part = new AutoPart(partManager.generatePartID(), partName, manufacturer, partNumber, condition, warranty, cost, "");
+        partManager.addPart(part);
+        System.out.println("Part added successfully!");
     }
 
-
-
-    public void updatePart() {
-        System.out.print("Enter part ID to update: ");
-        String partID = scanner.nextLine();
-
+    public void updatePart(String partID) {
         AutoPart part = partManager.findPartById(partID);
-        if (part == null) {
-            System.out.println("Part not found.");
-            return;
+        if (part != null) {
+            System.out.print("Update part name (" + part.getPartName() + "): ");
+            String partName = scanner.nextLine();
+            System.out.print("Update manufacturer (" + part.getManufacturer() + "): ");
+            String manufacturer = scanner.nextLine();
+            System.out.print("Update part number (" + part.getPartNumber() + "): ");
+            String partNumber = scanner.nextLine();
+            System.out.print("Update condition (" + part.getCondition() + "): ");
+            String condition = scanner.nextLine();
+            System.out.print("Update warranty (" + part.getWarranty() + "): ");
+            String warranty = scanner.nextLine();
+            System.out.print("Update cost (" + part.getCost() + "): ");
+            double cost = scanner.nextDouble();
+            scanner.nextLine(); // Consume newline
+
+            part.setPartName(partName);
+            part.setManufacturer(manufacturer);
+            part.setPartNumber(partNumber);
+            part.setCondition(condition);
+            part.setWarranty(warranty);
+            part.setCost(cost);
+
+            partManager.updatePart(partID, part);
+            System.out.println("Part updated successfully!");
+        } else {
+            System.out.println("Part with ID " + partID + " not found.");
         }
-
-        System.out.print("Enter new part name: ");
-        String newPartName = scanner.nextLine();
-        System.out.print("Enter new manufacturer: ");
-        String newManufacturer = scanner.nextLine();
-        System.out.print("Enter new part number: ");
-        String newPartNumber = scanner.nextLine();
-        System.out.print("Enter new condition: ");
-        String newCondition = scanner.nextLine();
-        System.out.print("Enter new warranty: ");
-        String newWarranty = scanner.nextLine();
-        System.out.print("Enter new cost: ");
-        double newCost = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
-        System.out.print("Enter new additional notes: ");
-        String newAdditionalNotes = scanner.nextLine();
-
-        // Update the part's details
-        part.setPartName(newPartName);
-        part.setManufacturer(newManufacturer);
-        part.setPartNumber(newPartNumber);
-        part.setCondition(newCondition);
-        part.setWarranty(newWarranty);
-        part.setCost(newCost);
-        part.setAdditionalNotes(newAdditionalNotes);
-
-        System.out.println("Part updated successfully.");
     }
 
-
-    public void deletePart() {
-        System.out.print("Enter part ID to delete: ");
-        String partID = scanner.nextLine();
-
-        AutoPart part = partManager.findPartById(partID);
-        if (part == null) {
-            System.out.println("Part not found.");
-            return;
-        }
-
+    public void deletePart(String partID) {
         partManager.removePart(partID);
-        System.out.println("Part deleted successfully.");
+        System.out.println("Part deleted successfully!");
     }
 }

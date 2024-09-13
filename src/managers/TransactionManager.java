@@ -1,6 +1,7 @@
 package managers;
 
 import models.Transaction;
+import models.Service;
 import utils.FileUtils;
 
 import java.time.LocalDate;
@@ -12,14 +13,16 @@ import java.util.stream.Collectors;
 public class TransactionManager {
 
     // File paths for transactions, services, and parts data
-    private static final String TRANSACTION_FILE_PATH = "data/transactions";
-    private static final String SERVICE_FILE_PATH = "data/services";
-    private static final String PART_FILE_PATH = "data/parts";
+    private static final String TRANSACTION_FILE_PATH = "src/data/transactions";
+    private static final String SERVICE_FILE_PATH = "src/data/services";
+    private static final String PART_FILE_PATH = "src/data/parts";
 
     // Lists to hold transactions, services, and parts
     private List<Transaction> transactions = new ArrayList<>();
     private List<String[]> services;
     private List<String[]> parts;
+    // This variable keeps track of the last used transaction ID
+    private int lastTransactionNumber = 0;
 
     // Constructor: Load data from files
     public TransactionManager() {
@@ -48,32 +51,27 @@ public class TransactionManager {
         }
     }
 
+    // Convert a line of string data from file to Transaction object
     private Transaction deserializeTransaction(String line) {
-        // Use a regex to split by commas but ignore commas inside quotes
-        String[] transactionData = line.split(",");
+        String[] data = line.split(",");
+        String transactionID = data[0];
+        LocalDate transactionDate = LocalDate.parse(data[1]);
+        String clientID = data[2];
+        String salespersonID = data[3];
+        String mechanicID = data[4];
+        List<String> purchasedItems = List.of(data[5].split(";"));
+        double discount = Double.parseDouble(data[6]);
+        double totalAmount = Double.parseDouble(data[7]);
+        String additionalNotes = data[8];
 
-        // Check if the data has the correct number of fields (should be 8)
-        if (transactionData.length != 9) {
-            throw new IllegalArgumentException("Invalid transaction data format: " + line);
-        }
-
-        String transactionID = transactionData[0];
-        LocalDate transactionDate = LocalDate.parse(transactionData[1]);  // Parse the date
-        String clientID = transactionData[2];
-        String salespersonID = transactionData[3];
-        String mechanicID = transactionData[4];
-
-        // Split purchased items by ';'
-        List<String> purchasedItems = Arrays.asList(transactionData[5].split(";"));
-
-        double discount = Double.parseDouble(transactionData[6]);
-        double totalAmount = Double.parseDouble(transactionData[7].replaceAll("\"", ""));  // Remove quotes from totalAmount
-        String additionalNotes = transactionData[8].replaceAll("^\"|\"$", "");  // Remove surrounding quotes from additionalNotes
-
-        // Return a new Transaction object with the parsed data
         return new Transaction(transactionID, transactionDate, clientID, salespersonID, mechanicID, purchasedItems, discount, totalAmount, additionalNotes);
     }
 
+    // Generate the next transaction ID
+    public String generateTransactionID() {
+        lastTransactionNumber++;
+        return String.format("T%03d", lastTransactionNumber);  // Format as T001, T002, etc.
+    }
 
     // Add a new transaction
     public void addTransaction(Transaction transaction) {
@@ -81,42 +79,47 @@ public class TransactionManager {
         System.out.println("Transaction added successfully.");
     }
 
-    // Save transactions list to file after any changes
+    // Save transactions to file (to update after CRUD operations)
     private void saveTransactionsToFile() {
-        FileUtils.writeFile(TRANSACTION_FILE_PATH, transactions.stream()
+        List<String> serializedTransactions = transactions.stream()
                 .map(this::serializeTransaction)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        FileUtils.writeFile(TRANSACTION_FILE_PATH, serializedTransactions);
     }
 
-    // Convert a Transaction object to string for writing to file
+    // Convert a Transaction object to a string for saving to file
     private String serializeTransaction(Transaction transaction) {
+        String purchasedItems = String.join(";", transaction.getPurchasedItems());
         return transaction.getTransactionID() + "," + transaction.getTransactionDate() + "," + transaction.getClientID() + ","
-                + transaction.getSalespersonID() + "," + transaction.getMechanicID() + "," + String.join(";", transaction.getPurchasedItems()) + ","
-                + transaction.getDiscount() + "," + transaction.getTotalAmount() + "," + transaction.getAdditionalNotes();
+                + transaction.getSalespersonID() + "," + transaction.getMechanicID() + "," + purchasedItems + "," + transaction.getDiscount() + ","
+                + transaction.getTotalAmount() + "," + transaction.getAdditionalNotes();
     }
 
-    // Calculate total revenue in a given time period (day/week/month)
+    // Calculate total revenue in a time period
     public double calculateRevenue(LocalDate startDate, LocalDate endDate) {
         return transactions.stream()
-                .filter(t -> !t.getTransactionDate().isBefore(startDate) && !t.getTransactionDate().isAfter(endDate))
+                .filter(transaction -> (transaction.getTransactionDate().isEqual(startDate) || transaction.getTransactionDate().isAfter(startDate))
+                        && (transaction.getTransactionDate().isEqual(endDate) || transaction.getTransactionDate().isBefore(endDate)))
                 .mapToDouble(Transaction::getTotalAmount)
                 .sum();
     }
 
-    // Calculate total revenue generated by a specific mechanic
+    // Calculate revenue generated by a specific mechanic
     public double calculateMechanicRevenue(String mechanicID, LocalDate startDate, LocalDate endDate) {
         return transactions.stream()
-                .filter(t -> !t.getTransactionDate().isBefore(startDate) && !t.getTransactionDate().isAfter(endDate))
-                .filter(t -> t.getMechanicID().equals(mechanicID)) // Filter by mechanic ID
+                .filter(transaction -> mechanicID.equals(transaction.getMechanicID()))
+                .filter(transaction -> (transaction.getTransactionDate().isEqual(startDate) || transaction.getTransactionDate().isAfter(startDate))
+                        && (transaction.getTransactionDate().isEqual(endDate) || transaction.getTransactionDate().isBefore(endDate)))
                 .mapToDouble(Transaction::getTotalAmount)
                 .sum();
     }
 
-    // Calculate total revenue generated by a specific salesperson
+    // Calculate revenue generated by a specific salesperson
     public double calculateSalespersonRevenue(String salespersonID, LocalDate startDate, LocalDate endDate) {
         return transactions.stream()
-                .filter(t -> !t.getTransactionDate().isBefore(startDate) && !t.getTransactionDate().isAfter(endDate))
-                .filter(t -> t.getSalespersonID().equals(salespersonID)) // Filter by salesperson ID
+                .filter(transaction -> salespersonID.equals(transaction.getSalespersonID()))
+                .filter(transaction -> (transaction.getTransactionDate().isEqual(startDate) || transaction.getTransactionDate().isAfter(startDate))
+                        && (transaction.getTransactionDate().isEqual(endDate) || transaction.getTransactionDate().isBefore(endDate)))
                 .mapToDouble(Transaction::getTotalAmount)
                 .sum();
     }
@@ -131,28 +134,41 @@ public class TransactionManager {
     // Method to calculate cars sold in a month
     public long calculateCarsSoldInMonth(int month, int year) {
         return transactions.stream()
-                .filter(t -> t.getTransactionDate().getMonthValue() == month && t.getTransactionDate().getYear() == year)
-                .flatMap(t -> t.getPurchasedItems().stream())
-                .filter(item -> item.startsWith("C"))  // Assuming car IDs start with 'C'
-                .count();
+                .filter(transaction -> transaction.getTransactionDate().getMonthValue() == month && transaction.getTransactionDate().getYear() == year)
+                .count();  // This returns a long
     }
 
-    // Method to list cars sold
-    public List<String> listCarsSold(LocalDate startDate, LocalDate endDate) {
-        return transactions.stream()
-                .filter(t -> !t.getTransactionDate().isBefore(startDate) && !t.getTransactionDate().isAfter(endDate))
-                .flatMap(t -> t.getPurchasedItems().stream())
-                .filter(item -> item.startsWith("C"))
+
+    // List cars sold in a time period
+    public void listCarsSold(LocalDate startDate, LocalDate endDate) {
+        List<Transaction> carsSold = transactions.stream()
+                .filter(transaction -> transaction.getSalespersonID() != null) // Transactions handled by salespersons are car sales
+                .filter(transaction -> !transaction.getPurchasedItems().isEmpty()) // Ensure there are purchased items
+                .filter(transaction -> !transaction.getSalespersonID().isEmpty())
+                .filter(transaction -> (transaction.getTransactionDate().isEqual(startDate) || transaction.getTransactionDate().isAfter(startDate))
+                        && (transaction.getTransactionDate().isEqual(endDate) || transaction.getTransactionDate().isBefore(endDate)))
                 .collect(Collectors.toList());
+
+        if (carsSold.isEmpty()) {
+            System.out.println("No cars sold in the given period.");
+        } else {
+            carsSold.forEach(System.out::println);
+        }
     }
 
-    // Method to list services performed
-    public List<String> listServicesPerformed(LocalDate startDate, LocalDate endDate) {
-        return transactions.stream()
-                .filter(t -> !t.getTransactionDate().isBefore(startDate) && !t.getTransactionDate().isAfter(endDate))
-                .flatMap(t -> t.getPurchasedItems().stream())
-                .filter(item -> item.startsWith("S"))  // Assuming service IDs start with 'S'
+    // List services performed in a time period
+    public void listServicesPerformed(LocalDate startDate, LocalDate endDate) {
+        List<Transaction> servicesPerformed = transactions.stream()
+                .filter(transaction -> transaction.getMechanicID() != null && !transaction.getMechanicID().isEmpty()) // Transactions handled by mechanics are services
+                .filter(transaction -> (transaction.getTransactionDate().isEqual(startDate) || transaction.getTransactionDate().isAfter(startDate))
+                        && (transaction.getTransactionDate().isEqual(endDate) || transaction.getTransactionDate().isBefore(endDate)))
                 .collect(Collectors.toList());
+
+        if (servicesPerformed.isEmpty()) {
+            System.out.println("No services performed in the given period.");
+        } else {
+            servicesPerformed.forEach(System.out::println);
+        }
     }
 
     // Method to list auto parts sold
@@ -160,7 +176,7 @@ public class TransactionManager {
         return transactions.stream()
                 .filter(t -> !t.getTransactionDate().isBefore(startDate) && !t.getTransactionDate().isAfter(endDate))
                 .flatMap(t -> t.getPurchasedItems().stream())
-                .filter(item -> item.startsWith("P"))  // Assuming part IDs start with 'P'
+                .filter(item -> item.startsWith("p"))  // Assuming part IDs start with 'P'
                 .collect(Collectors.toList());
     }
 
@@ -169,12 +185,9 @@ public class TransactionManager {
         if (transactions.isEmpty()) {
             System.out.println("No transactions available.");
         } else {
-            for (Transaction transaction : transactions) {
-                System.out.println(transaction);  // Ensure Transaction class has a proper toString() method
-            }
+            transactions.forEach(System.out::println);
         }
     }
-
     // Find a transaction by its ID and return the transaction object (not void)
     public Transaction findTransactionById(String transactionId) {
         for (Transaction transaction : transactions) {
@@ -184,4 +197,5 @@ public class TransactionManager {
         }
         return null;  // Return null if no transaction is found
     }
+
 }

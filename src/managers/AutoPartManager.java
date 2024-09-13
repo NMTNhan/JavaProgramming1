@@ -1,31 +1,18 @@
 package managers;
 
 import models.AutoPart;
-import user.Client;
 import utils.FileUtils;
 
-import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AutoPartManager {
 
-    // File path for the auto parts data file
-    private static final String PART_FILE_PATH = "data/parts";
+    private static final String PART_FILE_PATH = "src/data/parts";
+    private List<AutoPart> autoParts = new ArrayList<>();
 
-    // List to hold all parts
-    private List<AutoPart> parts = new ArrayList<>();
-
-    public void getAllParts() {
-        if (parts.isEmpty()) {
-            System.out.println("No parts available.");
-        } else {
-            for (AutoPart part : parts) {
-                System.out.println(part);  // Ensure AutoPart class has a proper toString method
-            }
-        }
-    }
-
+    private int nextPartID = 1;
 
     // Constructor: Load parts from file when the manager is initialized
     public AutoPartManager() {
@@ -34,14 +21,13 @@ public class AutoPartManager {
 
     // Convert string line from file to an AutoPart object
     private AutoPart deserializePart(String line) {
-        String[] partData = line.split(","); // Use comma as delimiter
+        String[] partData = line.split(",");
 
         // Check if the data has the correct number of fields
         if (partData.length != 8) {
-            throw new IllegalArgumentException("Invalid auto part data format: " + line);
+            throw new IllegalArgumentException("Invalid part data format: " + line);
         }
 
-        // Assuming the part is stored as: partID, partName, manufacturer, partNumber, condition, warranty, cost, additionalNotes
         try {
             String partID = partData[0];
             String partName = partData[1];
@@ -54,28 +40,30 @@ public class AutoPartManager {
 
             return new AutoPart(partID, partName, manufacturer, partNumber, condition, warranty, cost, additionalNotes);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Error parsing auto part data: " + line, e);
+            throw new IllegalArgumentException("Error parsing part data: " + line, e);
         }
     }
 
     // Convert an AutoPart object to string for writing to file
     private String serializePart(AutoPart part) {
-        return part.getPartID() + "," + part.getPartName() + "," + part.getManufacturer() + "," + part.getPartNumber() + ","
-                + part.getCondition() + "," + part.getWarranty() + "," + part.getCost() + "," + part.getAdditionalNotes();
+        return part.getPartID() + "," + part.getPartName() + "," + part.getManufacturer() + "," +
+                part.getPartNumber() + "," + part.getCondition() + "," + part.getWarranty() + "," +
+                part.getCost() + "," + part.getAdditionalNotes();
     }
 
     // Load parts from file
     private void loadPartsFromFile() {
         List<String> partLines = FileUtils.readFile(PART_FILE_PATH);
         for (String line : partLines) {
-            parts.add(deserializePart(line));  // Assuming deserializePart() exists and works
+            autoParts.add(deserializePart(line));
         }
+        System.out.println("Parts loaded: " + autoParts.size());
     }
 
     // Add a new part
     public void addPart(AutoPart part) {
-        parts.add(part);
-        List<String> serializedParts = parts.stream()
+        autoParts.add(part);
+        List<String> serializedParts = autoParts.stream()
                 .map(this::serializePart)
                 .collect(Collectors.toList());
         FileUtils.writeFile(PART_FILE_PATH, serializedParts);
@@ -83,10 +71,10 @@ public class AutoPartManager {
 
     // Remove a part
     public void removePart(String partId) {
-        parts = parts.stream()
+        autoParts = autoParts.stream()
                 .filter(part -> !part.getPartID().equals(partId))
                 .collect(Collectors.toList());
-        List<String> serializedParts = parts.stream()
+        List<String> serializedParts = autoParts.stream()
                 .map(this::serializePart)
                 .collect(Collectors.toList());
         FileUtils.writeFile(PART_FILE_PATH, serializedParts);
@@ -94,25 +82,44 @@ public class AutoPartManager {
 
     // Update an existing part
     public void updatePart(String partId, AutoPart updatedPart) {
-        for (int i = 0; i < parts.size(); i++) {
-            if (parts.get(i).getPartID().equals(partId)) {
-                parts.set(i, updatedPart);
+        for (int i = 0; i < autoParts.size(); i++) {
+            if (autoParts.get(i).getPartID().equals(partId)) {
+                autoParts.set(i, updatedPart);
                 break;
             }
         }
-        List<String> serializedParts = parts.stream()
+        List<String> serializedParts = autoParts.stream()
                 .map(this::serializePart)
                 .collect(Collectors.toList());
         FileUtils.writeFile(PART_FILE_PATH, serializedParts);
     }
 
-    // Find a part by its ID and return the part object (not void)
+    // Find a part by its ID
     public AutoPart findPartById(String partId) {
-        for (AutoPart part : parts) {
+        for (AutoPart part : autoParts) {
             if (part.getPartID().equals(partId)) {
-                return part;  // Return the part if found
+                return part;
             }
         }
-        return null;  // Return null if no part is found
+        return null;
     }
+
+    // Get all parts
+    public void getAllParts() {
+        if (autoParts.isEmpty()) {
+            System.out.println("No parts available.");
+        } else {
+            for (AutoPart part : autoParts) {
+                System.out.println(part);
+            }
+        }
+    }
+
+    // Method to generate the next part ID with the format pXXX
+    public String generatePartID() {
+        String partID = "p" + String.format("%03d", nextPartID);
+        nextPartID++;
+        return partID;
+    }
+
 }
