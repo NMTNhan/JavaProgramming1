@@ -42,10 +42,10 @@ public class TransactionManager {
 
     // Load transactions from file
     private void loadTransactionsFromFile() {
-        List<String> lines = FileUtils.readFile(TRANSACTION_FILE_PATH);
-        transactions = lines.stream()
-                .map(this::deserializeTransaction)
-                .collect(Collectors.toList());
+        List<String> transactionLines = FileUtils.readFile(TRANSACTION_FILE_PATH);
+        for (String line : transactionLines) {
+            transactions.add(deserializeTransaction(line));  // Assuming deserializeTransaction() exists
+        }
     }
 
     private Transaction deserializeTransaction(String line) {
@@ -164,16 +164,24 @@ public class TransactionManager {
                 .collect(Collectors.toList());
     }
 
-    public List<Transaction> getAllTransactions() {
-        return transactions;  // Return the list of all transactions
+    // Print all transactions
+    public void getAllTransactions() {
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions available.");
+        } else {
+            for (Transaction transaction : transactions) {
+                System.out.println(transaction);  // Ensure Transaction class has a proper toString() method
+            }
+        }
     }
 
+    // Find a transaction by its ID and return the transaction object (not void)
     public Transaction findTransactionById(String transactionId) {
         for (Transaction transaction : transactions) {
             if (transaction.getTransactionID().equals(transactionId)) {
-                return transaction;
+                return transaction;  // Return the transaction if found
             }
         }
-        return null;  // Transaction not found
+        return null;  // Return null if no transaction is found
     }
 }

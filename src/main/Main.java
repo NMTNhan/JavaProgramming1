@@ -1,20 +1,14 @@
 package main;
 
-import managers.CarManager;
-import managers.AutoPartManager;
-import managers.ServiceManager;
-import managers.TransactionManager;
-import managers.UserManager;
-import main.ManagerMenu;
-import main.EmployeeMenu;
-import main.ClientMenu;
-import java.time.LocalDate;
-import java.util.Scanner;
+import authentication.Authentication;
+import managers.*;
 import user.Client;
 import user.Employee;
 import user.Manager;
 import user.User;
-import authentication.Authentication;
+
+import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Main {
 

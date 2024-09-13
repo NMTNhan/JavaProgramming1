@@ -18,7 +18,7 @@ public class CarManager {
 
     // Constructor: Load cars from file when the manager is initialized
     public CarManager() {
-        loadCarsFromFile();
+        loadCarsFromFile();  // Ensure cars are loaded on initialization
     }
 
     // Convert string line from file to a Car object
@@ -60,11 +60,14 @@ public class CarManager {
 
     // Load cars from file
     private void loadCarsFromFile() {
-        List<String> lines = FileUtils.readFile(CAR_FILE_PATH);
-        cars = lines.stream()
-                .filter(line -> !line.trim().isEmpty()) // Ignore empty lines
-                .map(this::deserializeCar)
-                .collect(Collectors.toList());
+        // Assuming FileUtils.readFile() reads the car data file correctly
+        List<String> carLines = FileUtils.readFile(CAR_FILE_PATH);
+        for (String line : carLines) {
+            cars.add(deserializeCar(line));  // Assuming deserializeCar() works correctly
+        }
+
+        // Debugging line to check if data is loaded
+        System.out.println("Cars loaded: " + cars.size());
     }
 
     // Add a new car
@@ -101,19 +104,30 @@ public class CarManager {
         FileUtils.writeFile(CAR_FILE_PATH, serializedCars);
     }
 
+    // Find a car by its ID and return the car object (not void)
     public Car findCarById(String carId) {
+        System.out.println("Searching for car ID: " + carId.trim());  // Debugging line
         for (Car car : cars) {
-            if (car.getCarID().equals(carId)) {
-                return car;
+            System.out.println("Comparing with car ID: " + car.getCarID().trim());  // Debugging line
+            if (car.getCarID().trim().equalsIgnoreCase(carId.trim())) {
+                return car;  // Return the car if found
             }
         }
-        return null;  // Car not found
+        return null;  // Return null if no car is found
     }
+
+
+
 
     // Get all cars
-    public List<Car> getAllCars() {
-        return cars;
+    public void getAllCars() {
+        if (cars.isEmpty()) {
+            System.out.println("No cars available.");
+        } else {
+            for (Car car : cars) {
+                System.out.println(car);  // Ensure Car class has a proper toString method
+            }
+        }
     }
-
 
 }

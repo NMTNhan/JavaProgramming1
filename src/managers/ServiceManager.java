@@ -18,8 +18,14 @@ public class ServiceManager {
     // List to hold all services
     private List<Service> services = new ArrayList<>();
 
-    public List<Service> getAllServices() {
-        return services; // Return the list of services
+    public void getAllServices() {
+        if (services.isEmpty()) {
+            System.out.println("No services available.");
+        } else {
+            for (Service service : services) {
+                System.out.println(service);  // Ensure Service class has a proper toString method
+            }
+        }
     }
 
     // Constructor: Load services from file when the manager is initialized
@@ -62,10 +68,10 @@ public class ServiceManager {
 
     // Load services from file
     private void loadServicesFromFile() {
-        List<String> lines = FileUtils.readFile(SERVICE_FILE_PATH);
-        services = lines.stream()
-                .map(this::deserializeService)
-                .collect(Collectors.toList());
+        List<String> serviceLines = FileUtils.readFile(SERVICE_FILE_PATH);
+        for (String line : serviceLines) {
+            services.add(deserializeService(line));  // Assuming deserializeService() exists and works
+        }
     }
 
     // Add a new service and update client's total spending
@@ -106,14 +112,13 @@ public class ServiceManager {
         FileUtils.writeFile(SERVICE_FILE_PATH, serializedServices);
     }
 
+    // Find a service by its ID and return the service object (not void)
     public Service findServiceById(String serviceId) {
         for (Service service : services) {
             if (service.getServiceID().equals(serviceId)) {
-                return service;
+                return service;  // Return the service if found
             }
         }
-        return null;  // Service not found
+        return null;  // Return null if no service is found
     }
-
-
 }

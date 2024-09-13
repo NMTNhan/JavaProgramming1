@@ -16,16 +16,16 @@ public class AutoPartManager {
     // List to hold all parts
     private List<AutoPart> parts = new ArrayList<>();
 
-    public List<AutoPart> getAllParts() {
-        return parts; // Return the list of auto parts
+    public void getAllParts() {
+        if (parts.isEmpty()) {
+            System.out.println("No parts available.");
+        } else {
+            for (AutoPart part : parts) {
+                System.out.println(part);  // Ensure AutoPart class has a proper toString method
+            }
+        }
     }
 
-    // Add a new part and update client's total spending
-    public void addPart(AutoPart part, Client client) {
-        parts.add(part);
-        client.addSpending(part.getCost()); // Add spending for the part
-        FileUtils.writeFile(PART_FILE_PATH, parts.stream().map(this::serializePart).collect(Collectors.toList()));
-    }
 
     // Constructor: Load parts from file when the manager is initialized
     public AutoPartManager() {
@@ -66,10 +66,10 @@ public class AutoPartManager {
 
     // Load parts from file
     private void loadPartsFromFile() {
-        List<String> lines = FileUtils.readFile(PART_FILE_PATH);
-        parts = lines.stream()
-                .map(this::deserializePart)
-                .collect(Collectors.toList());
+        List<String> partLines = FileUtils.readFile(PART_FILE_PATH);
+        for (String line : partLines) {
+            parts.add(deserializePart(line));  // Assuming deserializePart() exists and works
+        }
     }
 
     // Add a new part
@@ -106,13 +106,13 @@ public class AutoPartManager {
         FileUtils.writeFile(PART_FILE_PATH, serializedParts);
     }
 
+    // Find a part by its ID and return the part object (not void)
     public AutoPart findPartById(String partId) {
         for (AutoPart part : parts) {
             if (part.getPartID().equals(partId)) {
-                return part;
+                return part;  // Return the part if found
             }
         }
-        return null;  // Part not found
+        return null;  // Return null if no part is found
     }
-
 }
