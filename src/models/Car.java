@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public class Car {
     private String carID;
     private String make;
@@ -7,14 +9,15 @@ public class Car {
     private int year;
     private double mileage;
     private String color;
-    private String status; // available, sold
+    private String status; // available/sold
     private double price;
-    private String condition;
-    private String warranty;
+    private List<String> historyServices; // History of services
+    private String additionalNotes;
 
-    // Constructor
+    // Constructor with all fields
     public Car(String carID, String make, String model, int year, double mileage,
-               String color, String status, double price, String condition, String warranty) {
+               String color, String status, double price,
+               List<String> historyServices, String additionalNotes) {
         this.carID = carID;
         this.make = make;
         this.model = model;
@@ -23,8 +26,8 @@ public class Car {
         this.color = color;
         this.status = status;
         this.price = price;
-        this.condition = condition;
-        this.warranty = warranty;
+        this.historyServices = historyServices;
+        this.additionalNotes = additionalNotes;
     }
 
     // Getters and Setters
@@ -52,15 +55,15 @@ public class Car {
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
 
-    public String getCondition() { return condition; }
-    public void setCondition(String condition) { this.condition = condition; }
+    public List<String> getHistoryServices() { return historyServices; }
+    public void setHistoryServices(List<String> historyServices) { this.historyServices = historyServices; }
 
-    public String getWarranty() { return warranty; }
-    public void setWarranty(String warranty) { this.warranty = warranty; }
+    public String getAdditionalNotes() { return additionalNotes; }
+    public void setAdditionalNotes(String additionalNotes) { this.additionalNotes = additionalNotes; }
 
     @Override
     public String toString() {
         return carID + " " + make + " " + model + " (" + year + ") - " + status +
-                ", Mileage: " + mileage + "km, Price: $" + price;
+                ", Mileage: " + mileage + "km, Price: $" + price + ", History Services: " + historyServices;
     }
 }

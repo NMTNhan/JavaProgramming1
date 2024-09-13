@@ -1,25 +1,28 @@
 package models;
 
+import java.time.LocalDate;
 import java.util.List;
 
-public class Transaction {
+public class Transaction implements ITransaction {
 
     private String transactionID;
-    private String transactionDate;
+    private LocalDate transactionDate;
     private String clientID;
     private String salespersonID;
-    private List<String> purchasedItems; // List of car/part IDs
+    private String mechanicID;
+    private List<String> purchasedItems;
     private double discount;
     private double totalAmount;
     private String additionalNotes;
 
     // Constructor
-    public Transaction(String transactionID, String transactionDate, String clientID, String salespersonID,
-            List<String> purchasedItems, double discount, double totalAmount, String additionalNotes) {
+    public Transaction(String transactionID, LocalDate transactionDate, String clientID, String salespersonID,
+                       String mechanicID, List<String> purchasedItems, double discount, double totalAmount, String additionalNotes) {
         this.transactionID = transactionID;
         this.transactionDate = transactionDate;
         this.clientID = clientID;
         this.salespersonID = salespersonID;
+        this.mechanicID = mechanicID;
         this.purchasedItems = purchasedItems;
         this.discount = discount;
         this.totalAmount = totalAmount;
@@ -35,11 +38,11 @@ public class Transaction {
         this.transactionID = transactionID;
     }
 
-    public String getTransactionDate() {
+    public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(String transactionDate) {
+    public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -57,6 +60,14 @@ public class Transaction {
 
     public void setSalespersonID(String salespersonID) {
         this.salespersonID = salespersonID;
+    }
+
+    public String getMechanicID() {
+        return mechanicID;
+    }
+
+    public void setMechanicID(String mechanicID) {
+        this.mechanicID = mechanicID;
     }
 
     public List<String> getPurchasedItems() {
@@ -97,6 +108,7 @@ public class Transaction {
                 + ", Date: " + transactionDate
                 + ", Client ID: " + clientID
                 + ", Salesperson ID: " + salespersonID
+                + ", Mechanic ID: " + mechanicID
                 + ", Purchased Items: " + String.join(", ", purchasedItems)
                 + ", Discount: " + discount + "%"
                 + ", Total Amount: $" + totalAmount

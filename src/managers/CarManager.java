@@ -5,12 +5,13 @@ import utils.FileUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class CarManager {
 
     // File path for the cars data file
-    private static final String CAR_FILE_PATH = "src/data/cars";
+    private static final String CAR_FILE_PATH = "data/cars";
 
     // List to hold all cars
     private List<Car> cars = new ArrayList<>();
@@ -22,23 +23,46 @@ public class CarManager {
 
     // Convert string line from file to a Car object
     private Car deserializeCar(String line) {
-        // Assuming the car is stored as: carID, make, model, year, mileage, color, status, price, condition, warranty
         String[] carData = line.split(",");
-        return new Car(carData[0], carData[1], carData[2], Integer.parseInt(carData[3]), Double.parseDouble(carData[4]),
-                carData[5], carData[6], Double.parseDouble(carData[7]), carData[8], carData[9]);
+
+        // Check if the data has the correct number of fields
+        if (carData.length != 10) {
+            throw new IllegalArgumentException("Invalid car data format: " + line);
+        }
+
+        try {
+            String carID = carData[0];
+            String make = carData[1];
+            String model = carData[2];
+            int year = Integer.parseInt(carData[3]);
+            double mileage = Double.parseDouble(carData[4]);
+            String color = carData[5];
+            String status = carData[6];
+            double price = Double.parseDouble(carData[7]);
+
+            List<String> serviceIDs = List.of(carData[8].split(";"));
+
+            String additionalNotes = carData[9];
+
+            return new Car(carID, make, model, year, mileage, color, status, price, serviceIDs, additionalNotes);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error parsing car data: " + line, e);
+        }
     }
 
     // Convert a Car object to string for writing to file
     private String serializeCar(Car car) {
-        return car.getCarID() + "," + car.getMake() + "," + car.getModel() + "," + car.getYear() + "," +
-                car.getMileage() + "," + car.getColor() + "," + car.getStatus() + "," + car.getPrice() + "," +
-                car.getCondition() + "," + car.getWarranty();
+        String serviceIDs = String.join(";", car.getHistoryServices());
+        return car.getCarID() + "," + car.getMake() + "," + car.getModel() + "," + car.getYear() + ","
+                + car.getMileage() + "," + car.getColor() + "," + car.getStatus() + "," + car.getPrice() + ","
+                + serviceIDs + "," + car.getAdditionalNotes();
     }
 
     // Load cars from file
     private void loadCarsFromFile() {
         List<String> lines = FileUtils.readFile(CAR_FILE_PATH);
         cars = lines.stream()
+                .filter(line -> !line.trim().isEmpty()) // Ignore empty lines
                 .map(this::deserializeCar)
                 .collect(Collectors.toList());
     }
@@ -76,4 +100,20 @@ public class CarManager {
                 .collect(Collectors.toList());
         FileUtils.writeFile(CAR_FILE_PATH, serializedCars);
     }
+
+    public Car findCarById(String carId) {
+        for (Car car : cars) {
+            if (car.getCarID().equals(carId)) {
+                return car;
+            }
+        }
+        return null;  // Car not found
+    }
+
+    // Get all cars
+    public List<Car> getAllCars() {
+        return cars;
+    }
+
+
 }
