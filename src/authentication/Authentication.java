@@ -86,6 +86,7 @@ public class Authentication {
         return false;
     }
 
+    // Get logged in user
     public User getLoggedInUser() {
         return loggedInUser;
     }

@@ -41,7 +41,7 @@ public class ManagerMenu {
         this.serviceCRUD = new ServiceCRUD(serviceManager, scanner);
     }
 
-
+    // Manager menu
     public void displayMenu() {
         boolean back = false;
 
@@ -54,7 +54,7 @@ public class ManagerMenu {
 
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -75,8 +75,9 @@ public class ManagerMenu {
         }
     }
 
+    // View and search for entities
     private void viewOrSearchEntities() {
-        System.out.println("\nView or Search Entities:");
+        System.out.println("\nView and Search Entities:");
         System.out.println("1. Cars");
         System.out.println("2. Parts");
         System.out.println("3. Services");
@@ -114,6 +115,7 @@ public class ManagerMenu {
         }
     }
 
+    // Search entities by ID
     private void searchEntityById(int entityChoice) {
         System.out.print("Enter the ID: ");
         String id = scanner.nextLine();
@@ -164,6 +166,7 @@ public class ManagerMenu {
         }
     }
 
+    // CRUD Menu
     private void performCrudOperations() {
         boolean back = false;
 
@@ -197,6 +200,7 @@ public class ManagerMenu {
         }
     }
 
+    // Car CRUD
     private void carCRUDMenu() {
         boolean back = false;
 
@@ -234,6 +238,7 @@ public class ManagerMenu {
         }
     }
 
+    // Part CRUD
     private void partCRUDMenu() {
         boolean back = false;
 
@@ -271,6 +276,7 @@ public class ManagerMenu {
         }
     }
 
+    // Service CRUD
     private void serviceCRUDMenu() {
         boolean back = false;
 
@@ -309,6 +315,7 @@ public class ManagerMenu {
     }
 
 
+    // Calculate statistics
     private void calculateStatistics() {
         boolean back = false;
 
@@ -346,6 +353,7 @@ public class ManagerMenu {
         }
     }
 
+    // Calculate cars sold
     private void calculateCarsSoldInMonth() {
         System.out.print("Enter the month (1-12): ");
         int month = scanner.nextInt();
@@ -357,7 +365,7 @@ public class ManagerMenu {
     }
 
 
-
+    // Calculate revenue in time period
     private void calculateRevenueInTimePeriod() {
         System.out.println("Enter the start date (yyyy-MM-dd): ");
         LocalDate startDate = LocalDate.parse(scanner.nextLine());
@@ -369,7 +377,7 @@ public class ManagerMenu {
         System.out.println("Total revenue from " + startDate + " to " + endDate + ": $" + revenue);
     }
 
-
+    // Calculate mechanic revenue
     private void calculateMechanicRevenue() {
         System.out.print("Enter mechanic ID: ");
         String mechanicID = scanner.nextLine();
@@ -385,6 +393,7 @@ public class ManagerMenu {
     }
 
 
+    // Calculate salesperson revenue
     private void calculateSalespersonRevenue() {
         System.out.print("Enter salesperson ID: ");
         String salespersonID = scanner.nextLine();
@@ -397,18 +406,5 @@ public class ManagerMenu {
 
         double revenue = transactionManager.calculateSalespersonRevenue(salespersonID, startDate, endDate);
         System.out.println("Total revenue from cars sold by " + salespersonID + ": $" + revenue);
-    }
-
-
-    private LocalDate[] promptForDateRange() {
-        System.out.print("Enter start date (yyyy-MM-dd): ");
-        String startDateInput = scanner.nextLine();
-        LocalDate startDate = LocalDate.parse(startDateInput, DateTimeFormatter.ISO_LOCAL_DATE);
-
-        System.out.print("Enter end date (yyyy-MM-dd): ");
-        String endDateInput = scanner.nextLine();
-        LocalDate endDate = LocalDate.parse(endDateInput, DateTimeFormatter.ISO_LOCAL_DATE);
-
-        return new LocalDate[]{startDate, endDate};
     }
 }

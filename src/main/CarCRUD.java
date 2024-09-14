@@ -17,6 +17,7 @@ public class CarCRUD {
         this.scanner = scanner;
     }
 
+    // Create Car
     public void createCar() {
         System.out.print("Enter car make: ");
         String make = scanner.nextLine();
@@ -32,25 +33,17 @@ public class CarCRUD {
         System.out.print("Enter car price: ");
         double price = scanner.nextDouble();
         scanner.nextLine();
-
-        // Assuming no service history initially
         List<String> historyServices = new ArrayList<>();  // Initialize empty service history
-
         System.out.print("Enter any additional notes: ");
         String additionalNotes = scanner.nextLine();
-
-        // Generate a new car ID
         String carId = carManager.generateCarID();
-
-        // Create a new Car object
         Car newCar = new Car(carId, make, model, year, mileage, color, "available", price, historyServices, additionalNotes);
-
-        // Add the car to the manager
         carManager.addCar(newCar);
         System.out.println("Car created successfully with ID: " + carId);
         ActivityLogManager.logActivity("Car Created");
     }
 
+    // Update car
     public void updateCar(String carID) {
         Car car = carManager.findCarById(carID);
         if (car != null) {
@@ -84,6 +77,7 @@ public class CarCRUD {
         ActivityLogManager.logActivity("Car Updated");
     }
 
+    // Delete car
     public void deleteCar(String carID) {
         carManager.removeCar(carID);
         System.out.println("Car deleted successfully!");

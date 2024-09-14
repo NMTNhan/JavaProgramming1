@@ -14,6 +14,7 @@ public class EmployeeMenu {
         this.scanner = scanner;
     }
 
+    // Employee menu
     public void displayMenu() {
         boolean exit = false;
 
@@ -47,25 +48,28 @@ public class EmployeeMenu {
         }
     }
 
+    // Calculate revenue
     private void calculateRevenue() {
         LocalDate[] dateRange = promptForDateRange();
         double revenue = transactionManager.calculateRevenue(dateRange[0], dateRange[1]);
         System.out.println("Revenue between " + dateRange[0] + " and " + dateRange[1] + ": $" + revenue);
     }
 
+    // list cars sold
     private void listCarsSold() {
         LocalDate[] dateRange = promptForDateRange();
         System.out.println("Cars sold between " + dateRange[0] + " and " + dateRange[1] + ":");
         transactionManager.listCarsSold(dateRange[0], dateRange[1]);
     }
 
+    // List service sold
     private void listServicesSold() {
         LocalDate[] dateRange = promptForDateRange();
         System.out.println("Services performed between " + dateRange[0] + " and " + dateRange[1] + ":");
         transactionManager.listServicesPerformed(dateRange[0], dateRange[1]);
     }
 
-
+    // Prompt user to enter date range
     private LocalDate[] promptForDateRange() {
         System.out.print("Enter start date (yyyy-MM-dd): ");
         String startDateInput = scanner.nextLine();

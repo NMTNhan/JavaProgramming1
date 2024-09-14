@@ -75,9 +75,6 @@ public class CarManager {
         for (String line : carLines) {
             cars.add(deserializeCar(line));  // Assuming deserializeCar() works correctly
         }
-
-        // Debugging line to check if data is loaded
-        System.out.println("Cars loaded: " + cars.size());
     }
 
     // **CRUD: Create a new car**
@@ -89,11 +86,9 @@ public class CarManager {
 
     // **CRUD: Read (Find) a car by ID**
     public Car findCarById(String carId) {
-        System.out.println("Searching for car ID: " + carId.trim());  // Debugging line
         for (Car car : cars) {
-            System.out.println("Comparing with car ID: " + car.getCarID().trim());  // Debugging line
             if (car.getCarID().trim().equalsIgnoreCase(carId.trim())) {
-                System.out.println("Car found: " + car);  // Debugging line
+                System.out.println("Car found: " + car);
                 return car;
             }
         }

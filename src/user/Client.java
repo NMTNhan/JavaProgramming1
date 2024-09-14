@@ -37,36 +37,4 @@ public class Client extends User {
             this.membershipLevel = "Silver";
         }
     }
-
-
-    // Get discount rate based on membership level
-    public double getDiscountRate() {
-        switch (membershipLevel.toLowerCase()) {
-            case "silver":
-                return 0.05; // 5% discount
-            case "gold":
-                return 0.10; // 10% discount
-            case "platinum":
-                return 0.15; // 15% discount
-            default:
-                return 0.0; // No discount for unrecognized levels
-        }
-    }
-
-    public String getMembershipLevel() {
-        return this.membershipLevel;
-    }
-
-    public double getTotalSpending() {
-        return this.totalSpending;
-    }
-
-    // Add spending and apply discount when the client makes a purchase
-    public void purchaseItem(double itemCost) {
-        double discount = getDiscountRate();  // Get the discount based on the membership level
-        double finalCost = itemCost * (1 - discount);  // Apply discount
-        addSpending(finalCost);  // Update total spending
-        System.out.println("Purchased item with cost: " + finalCost);
-    }
-
 }

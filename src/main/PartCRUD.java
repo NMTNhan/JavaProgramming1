@@ -14,6 +14,7 @@ public class PartCRUD {
         this.scanner = scanner;
     }
 
+    // Create part
     public void createPart() {
         System.out.print("Enter part name: ");
         String partName = scanner.nextLine();
@@ -34,6 +35,7 @@ public class PartCRUD {
         System.out.println("Part added successfully!");
     }
 
+    // Update part
     public void updatePart(String partID) {
         AutoPart part = partManager.findPartById(partID);
         if (part != null) {
@@ -65,6 +67,7 @@ public class PartCRUD {
         }
     }
 
+    // Delete part
     public void deletePart(String partID) {
         partManager.removePart(partID);
         System.out.println("Part deleted successfully!");

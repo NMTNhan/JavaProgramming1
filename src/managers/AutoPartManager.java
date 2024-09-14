@@ -57,7 +57,6 @@ public class AutoPartManager {
         for (String line : partLines) {
             autoParts.add(deserializePart(line));
         }
-        System.out.println("Parts loaded: " + autoParts.size());
     }
 
     // Add a new part

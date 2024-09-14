@@ -14,6 +14,7 @@ public class ServiceCRUD {
         this.scanner = scanner;
     }
 
+    // Create service
     public void createService() {
         System.out.print("Enter service type: ");
         String serviceType = scanner.nextLine();
@@ -30,6 +31,7 @@ public class ServiceCRUD {
         System.out.println("Service added successfully!");
     }
 
+    // Update service
     public void updateService(String serviceID) {
         Service service = serviceManager.findServiceById(serviceID);
         if (service != null) {
@@ -55,8 +57,7 @@ public class ServiceCRUD {
         }
     }
 
-
-
+    // Delete service
     public void deleteService(String serviceID) {
         serviceManager.removeService(serviceID);
         System.out.println("Service deleted successfully!");
