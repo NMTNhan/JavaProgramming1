@@ -40,7 +40,6 @@ public class CarCRUD {
         Car newCar = new Car(carId, make, model, year, mileage, color, "available", price, historyServices, additionalNotes);
         carManager.addCar(newCar);
         System.out.println("Car created successfully with ID: " + carId);
-        ActivityLogManager.logActivity("Car Created");
     }
 
     // Update car
@@ -74,13 +73,11 @@ public class CarCRUD {
         } else {
             System.out.println("Car with ID " + carID + " not found.");
         }
-        ActivityLogManager.logActivity("Car Updated");
     }
 
     // Delete car
     public void deleteCar(String carID) {
         carManager.removeCar(carID);
         System.out.println("Car deleted successfully!");
-        ActivityLogManager.logActivity("Car Deleted");
     }
 }
