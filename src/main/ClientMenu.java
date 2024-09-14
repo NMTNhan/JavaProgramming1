@@ -93,7 +93,6 @@ public class ClientMenu {
         } else {
             System.out.println("Invalid Service ID. Please try again.");
         }
-        ActivityLogManager.logActivity("Transaction Created");
     }
 
     // View Parts
