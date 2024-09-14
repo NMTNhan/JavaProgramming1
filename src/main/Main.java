@@ -71,7 +71,6 @@ public class Main {
             transactionManager = new TransactionManager();
             userManager = new UserManager();
             authentication = new Authentication();
-            System.out.println("Managers and Authentication initialized.");
         } catch (Exception e) {
             System.out.println("Error initializing managers or authentication: " + e.getMessage());
             e.printStackTrace();

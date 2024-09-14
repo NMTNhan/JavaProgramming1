@@ -14,32 +14,9 @@ public class UserManager {
     private static final String USER_FILE_PATH = "src/data/users";
     private List<User> users = new ArrayList<>();
     public UserManager() {
-        loadUsersFromFile();  // Load users when UserManager is instantiated
+        loadUsersFromFile();
     }
 
-    // Add a new user
-    public void addUser(User user) {
-        users.add(user);
-    }
-
-    // Soft delete user
-    public void removeUser(String userId) {
-        for (User user : users) {
-            if (user.getUserId().equals(userId)) {
-                user.setActive(false);  // Assuming setActive(boolean) exists in the User class
-            }
-        }
-    }
-
-    // Update user
-    public void updateUser(String userId, User updatedUser) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUserId().equals(userId)) {
-                users.set(i, updatedUser);
-                break;
-            }
-        }
-    }
 
     // Find a user by their ID and print the result
     public User findUserById(String userId) {
@@ -51,24 +28,16 @@ public class UserManager {
         return null;
     }
 
-    public Employee findEmployeeById(String employeeId) {
-        for (User user : users) {
-            if (user instanceof Employee && user.getUserId().equals(employeeId)) {
-                return (Employee) user;
-            }
-        }
-        return null;  // Employee not found
-    }
 
     // Method to convert a CSV line to a User object
     private User deserializeUser(String line) {
-        String[] fields = line.split(",");  // Split by comma, assuming CSV format
+        String[] fields = line.split(",");
 
         // Common fields
         String userID = fields[0];
         String username = fields[1];
         String password = fields[2];
-        LocalDate dateOfBirth = LocalDate.parse(fields[3]);  // Assuming yyyy-MM-dd format
+        LocalDate dateOfBirth = LocalDate.parse(fields[3]);
         String address = fields[4];
         String phoneNumber = fields[5];
         String email = fields[6];
@@ -90,7 +59,7 @@ public class UserManager {
     private void loadUsersFromFile() {
         List<String> userLines = FileUtils.readFile(USER_FILE_PATH);
         for (String line : userLines) {
-            users.add(deserializeUser(line));  // Deserialize each line into a User object
+            users.add(deserializeUser(line));
         }
     }
 
@@ -100,7 +69,7 @@ public class UserManager {
             System.out.println("No users available.");
         } else {
             for (User user : users) {
-                System.out.println(user);  // Ensure User class has a proper toString() method
+                System.out.println(user);
             }
         }
     }

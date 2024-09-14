@@ -12,8 +12,7 @@ public class Authentication {
     private static final String ACCOUNT_FILE = "src/data/users"; // Correct CSV file path
 
     public Authentication() {
-        loadUsersFromFile();  // Debugging to check if the users are being loaded
-        System.out.println("DEBUG: Users loaded: " + userDatabase.size());
+        loadUsersFromFile();
     }
 
     // Load users from file
@@ -63,16 +62,15 @@ public class Authentication {
             String userID = user.getUserId();
             if (userID.startsWith("u")) {
                 try {
-                    int idNumber = Integer.parseInt(userID.substring(1)); // Get number part
+                    int idNumber = Integer.parseInt(userID.substring(1));
                     if (idNumber > maxID) {
                         maxID = idNumber;
                     }
                 } catch (NumberFormatException e) {
-                    // Ignore any non-numeric IDs
                 }
             }
         }
-        return String.format("u%03d", maxID + 1); // Generate next ID in the format u001, u002, etc.
+        return String.format("u%03d", maxID + 1);
     }
 
     // Login method

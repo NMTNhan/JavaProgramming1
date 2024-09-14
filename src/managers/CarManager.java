@@ -73,18 +73,18 @@ public class CarManager {
         // Assuming FileUtils.readFile() reads the car data file correctly
         List<String> carLines = FileUtils.readFile(CAR_FILE_PATH);
         for (String line : carLines) {
-            cars.add(deserializeCar(line));  // Assuming deserializeCar() works correctly
+            cars.add(deserializeCar(line));
         }
     }
 
-    // **CRUD: Create a new car**
+    // Create car
     public void addCar(Car car) {
         cars.add(car);
-        saveCarsToFile(); // Save the updated list to the file
+        saveCarsToFile();
         System.out.println("Car added: " + car);
     }
 
-    // **CRUD: Read (Find) a car by ID**
+    // Find car by ID
     public Car findCarById(String carId) {
         for (Car car : cars) {
             if (car.getCarID().trim().equalsIgnoreCase(carId.trim())) {
@@ -96,7 +96,7 @@ public class CarManager {
         return null;
     }
 
-    // **CRUD: Update an existing car**
+    // Update car
     public void updateCar(String carId, Car updatedCar) {
         for (int i = 0; i < cars.size(); i++) {
             if (cars.get(i).getCarID().equals(carId)) {
@@ -105,15 +105,15 @@ public class CarManager {
                 break;
             }
         }
-        saveCarsToFile(); // Save the updated list to the file
+        saveCarsToFile();
     }
 
-    // **CRUD: Delete a car**
+    // Delete car
     public void removeCar(String carId) {
         cars = cars.stream()
                 .filter(car -> !car.getCarID().equals(carId))
                 .collect(Collectors.toList());
-        saveCarsToFile(); // Save the updated list to the file
+        saveCarsToFile();
         System.out.println("Car removed with ID: " + carId);
     }
 
@@ -131,7 +131,7 @@ public class CarManager {
             System.out.println("No cars available.");
         } else {
             for (Car car : cars) {
-                System.out.println(car);  // Ensure Car class has a proper toString method
+                System.out.println(car);
             }
         }
     }

@@ -23,7 +23,6 @@ public class ServiceManager {
     private Service deserializeService(String line) {
         String[] serviceData = line.split("\\|");
 
-        // Check if the data has the correct number of fields
         if (serviceData.length != 8) {
             throw new IllegalArgumentException("Invalid service data format: " + line);
         }
@@ -62,7 +61,6 @@ public class ServiceManager {
         for (String line : serviceLines) {
             services.add(deserializeService(line));
         }
-        System.out.println("Services loaded: " + services.size());
     }
 
     // Add a new service

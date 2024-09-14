@@ -47,7 +47,7 @@ public class TransactionManager {
     private void loadTransactionsFromFile() {
         List<String> transactionLines = FileUtils.readFile(TRANSACTION_FILE_PATH);
         for (String line : transactionLines) {
-            transactions.add(deserializeTransaction(line));  // Assuming deserializeTransaction() exists
+            transactions.add(deserializeTransaction(line));
         }
     }
 
@@ -67,25 +67,6 @@ public class TransactionManager {
         return new Transaction(transactionID, transactionDate, clientID, salespersonID, mechanicID, purchasedItems, discount, totalAmount, additionalNotes);
     }
 
-    // Generate the next transaction ID
-    public String generateTransactionID() {
-        lastTransactionNumber++;
-        return String.format("T%03d", lastTransactionNumber);  // Format as T001, T002, etc.
-    }
-
-    // Add a new transaction
-    public void addTransaction(Transaction transaction) {
-        transactions.add(transaction);
-        System.out.println("Transaction added successfully.");
-    }
-
-    // Save transactions to file (to update after CRUD operations)
-    private void saveTransactionsToFile() {
-        List<String> serializedTransactions = transactions.stream()
-                .map(this::serializeTransaction)
-                .collect(Collectors.toList());
-        FileUtils.writeFile(TRANSACTION_FILE_PATH, serializedTransactions);
-    }
 
     // Convert a Transaction object to a string for saving to file
     private String serializeTransaction(Transaction transaction) {
@@ -124,12 +105,6 @@ public class TransactionManager {
                 .sum();
     }
 
-    // Method to list all transactions
-    public List<Transaction> listTransactions(LocalDate startDate, LocalDate endDate) {
-        return transactions.stream()
-                .filter(t -> !t.getTransactionDate().isBefore(startDate) && !t.getTransactionDate().isAfter(endDate))
-                .collect(Collectors.toList());
-    }
 
     // Method to calculate cars sold in a month
     public long calculateCarsSoldInMonth(int month, int year) {
@@ -176,7 +151,7 @@ public class TransactionManager {
         return transactions.stream()
                 .filter(t -> !t.getTransactionDate().isBefore(startDate) && !t.getTransactionDate().isAfter(endDate))
                 .flatMap(t -> t.getPurchasedItems().stream())
-                .filter(item -> item.startsWith("p"))  // Assuming part IDs start with 'P'
+                .filter(item -> item.startsWith("p"))
                 .collect(Collectors.toList());
     }
 
@@ -192,7 +167,7 @@ public class TransactionManager {
     public Transaction findTransactionById(String transactionId) {
         for (Transaction transaction : transactions) {
             if (transaction.getTransactionID().equals(transactionId)) {
-                return transaction;  // Return the transaction if found
+                return transaction;
             }
         }
         return null;  // Return null if no transaction is found

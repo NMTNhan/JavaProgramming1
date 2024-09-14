@@ -116,5 +116,5 @@ public class ClientMenu {
     {
         // Doesnt work so just leave it here
         }
-    }
 }
+

@@ -5,86 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef98fdba-493e-49a9-b7d1-88a4fde1e0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/models/ActivityLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activity_log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaProgramming1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/activity log/ActivityLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/authentication/Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/authentication/Authentication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/cars" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/cars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/transaction" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/users" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/users" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/CarCRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/CarCRUD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClientMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClientMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/EmployeeMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/ManagerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ManagerMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/PartCRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/PartCRUD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/ServiceCRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServiceCRUD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managers/AutoPartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/AutoPartManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/managers/CarManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/CarManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/managers/ServiceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/ServiceManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/managers/TransactionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/TransactionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/managers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/libraries/updated_src_fixed.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/Downloads.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/cars" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/parts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/services" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/transactions" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/users" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/ActivityLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/JavaProgramming1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/authentication/Authentication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/cars" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/parts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/services" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/transaction" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/transactions" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/users" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/CarCRUD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/ClientMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/EmployeeMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/ManagerMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/PartCRUD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/ServiceCRUD.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/AutoPartManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/CarManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/ServiceManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/TransactionManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/UserManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/AutoPart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/Car.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/IAutoPart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/ICar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/IService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/ITransaction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/Service.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/Transaction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Employee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/IUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Manager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Mechanic.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Salesperson.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/utils/FileUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transaction/cart.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/IUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/Mechanic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Mechanic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/Salesperson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Salesperson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,13 +49,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/JavaGroupProject&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JavaGroupProject/JavaProgramming1/src&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -202,6 +131,10 @@
       <workItem from="1726241685094" duration="2566000" />
       <workItem from="1726244398104" duration="7597000" />
       <workItem from="1726328496168" duration="2037000" />
+      <workItem from="1726330725412" duration="97000" />
+      <workItem from="1726330832813" duration="32000" />
+      <workItem from="1726330914945" duration="203000" />
+      <workItem from="1726331122482" duration="411000" />
     </task>
     <servers />
   </component>
