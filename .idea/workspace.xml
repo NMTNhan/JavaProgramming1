@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ef98fdba-493e-49a9-b7d1-88a4fde1e0ff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/models/ActivityLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activity_log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JavaProgramming1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/activity log/ActivityLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/authentication/Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/authentication/Authentication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/cars" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/cars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/transaction" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/users" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/users" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/CarCRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/CarCRUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ClientMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClientMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/EmployeeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ManagerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ManagerMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/PartCRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/PartCRUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ServiceCRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServiceCRUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/AutoPartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/AutoPartManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/CarManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/CarManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/ServiceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/ServiceManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/TransactionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/TransactionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/UserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/libraries/updated_src_fixed.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/Downloads.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/cars" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/parts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/services" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/transactions" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/Downloads/data/users" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/ActivityLog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/JavaProgramming1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/authentication/Authentication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/cars" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/parts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/services" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/transaction" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/transactions" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/data/users" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/CarCRUD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/ClientMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/EmployeeMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/ManagerMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/PartCRUD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/main/ServiceCRUD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/AutoPartManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/CarManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/ServiceManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/TransactionManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/managers/UserManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/AutoPart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/Car.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/IAutoPart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/ICar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/IService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/ITransaction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/Service.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/models/Transaction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Employee.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/IUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Manager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Mechanic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/Salesperson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/user/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/JavaProgramming1/utils/FileUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transaction/cart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/IUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/Mechanic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Mechanic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/Salesperson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/Salesperson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/User.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2m0YhhtGvkERp1Ksdnkl4KadEwK" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Compiler&quot;: &quot;Build finished&quot;,
+    &quot;Notification.DoNotAsk-Compiler&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JavaGroupProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-22" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="JavaProgramming1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.TestMain" />
+      <module name="JavaProgramming1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (1)" />
+      <item itemvalue="Application.TestMain" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.TestMain" />
+        <item itemvalue="Application.Main (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ef98fdba-493e-49a9-b7d1-88a4fde1e0ff" name="Changes" comment="" />
+      <created>1726215085934</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726215085934</updated>
+      <workItem from="1726215085936" duration="529000" />
+      <workItem from="1726218095441" duration="163000" />
+      <workItem from="1726225747864" duration="1475000" />
+      <workItem from="1726227268011" duration="4740000" />
+      <workItem from="1726241685094" duration="2566000" />
+      <workItem from="1726244398104" duration="7597000" />
+      <workItem from="1726328496168" duration="2037000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
