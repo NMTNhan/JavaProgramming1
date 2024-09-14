@@ -24,6 +24,9 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            // Print welcome screen
+            printWelcomeScreen();
+
             // Initialize the authentication system here, after the program has fully started
             authentication = new Authentication();
             initializeManagersAndAuthentication();  // Initialize the managers
@@ -61,6 +64,19 @@ public class Main {
         }
     }
 
+    // Welcome Screen
+    private static void printWelcomeScreen() {
+        System.out.println("============================================");
+        System.out.println("COSC2081 GROUP ASSIGNMENT");
+        System.out.println("AUTO168 CAR DEALERSHIP MANAGEMENT SYSTEM");
+        System.out.println("Instructor: Mr. Minh Vu & Mr. Dung Nguyen");
+        System.out.println("Group: Group 11");
+        System.out.println("s3935748, Tran Nguyen Khang");
+        System.out.println("s3965654, Le Tuan Kiet");
+        System.out.println("s3992133, Lu Duc Thinh");
+        System.out.println("s3924462, Nguyen Minh Trong Nhan");
+        System.out.println("============================================");
+    }
 
     // Initialize managers and authentication
     private static void initializeManagersAndAuthentication() {
