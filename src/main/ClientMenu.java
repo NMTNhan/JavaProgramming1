@@ -35,7 +35,7 @@ public class ClientMenu {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("\nClient Menu:");
+            System.out.println("\n=================CLIENT PAGE=================:");
             System.out.println("1. View Cars");
             System.out.println("2. View Services");
             System.out.println("3. View Parts");

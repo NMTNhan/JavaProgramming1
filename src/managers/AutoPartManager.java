@@ -17,7 +17,9 @@ public class AutoPartManager {
     // Constructor: Load parts from file when the manager is initialized
     public AutoPartManager() {
         loadPartsFromFile();
+        setNextPartID(); // Set the nextPartID after loading parts
     }
+
 
     // Convert string line from file to an AutoPart object
     private AutoPart deserializePart(String line) {
@@ -119,6 +121,21 @@ public class AutoPartManager {
         String partID = "p" + String.format("%03d", nextPartID);
         nextPartID++;
         return partID;
+    }
+
+    // Method to determine the next available part ID based on the highest existing ID
+    private void setNextPartID() {
+        int maxID = 0;
+        for (AutoPart part : autoParts) {
+            String partID = part.getPartID();
+            if (partID.startsWith("p")) {
+                int currentID = Integer.parseInt(partID.substring(1)); // Extract the numeric part of the ID
+                if (currentID > maxID) {
+                    maxID = currentID;
+                }
+            }
+        }
+        nextPartID = maxID + 1;  // Set nextPartID to one higher than the highest existing ID
     }
 
 }

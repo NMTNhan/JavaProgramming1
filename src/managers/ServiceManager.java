@@ -17,7 +17,9 @@ public class ServiceManager {
     // Constructor: Load services from file when the manager is initialized
     public ServiceManager() {
         loadServicesFromFile();
+        setNextServiceID(); // Set the nextServiceID after loading services
     }
+
 
     // Convert string line from file to a Service object
     private Service deserializeService(String line) {
@@ -124,4 +126,20 @@ public class ServiceManager {
         nextServiceID++;
         return serviceID;
     }
+
+    // Method to determine the next available service ID based on the highest existing ID
+    private void setNextServiceID() {
+        int maxID = 0;
+        for (Service service : services) {
+            String serviceID = service.getServiceID();
+            if (serviceID.startsWith("s")) {
+                int currentID = Integer.parseInt(serviceID.substring(1)); // Extract the numeric part of the ID
+                if (currentID > maxID) {
+                    maxID = currentID;
+                }
+            }
+        }
+        nextServiceID = maxID + 1;  // Set nextServiceID to one higher than the highest existing ID
+    }
+
 }

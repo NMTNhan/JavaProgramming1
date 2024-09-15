@@ -19,7 +19,7 @@ public class CarCRUD {
 
     // Create Car
     public void createCar() {
-        System.out.print("Enter car make: ");
+        System.out.print("Enter car maker: ");
         String make = scanner.nextLine();
         System.out.print("Enter car model: ");
         String model = scanner.nextLine();
@@ -46,7 +46,7 @@ public class CarCRUD {
     public void updateCar(String carID) {
         Car car = carManager.findCarById(carID);
         if (car != null) {
-            System.out.print("Update car make (" + car.getMake() + "): ");
+            System.out.print("Update car maker (" + car.getMake() + "): ");
             String make = scanner.nextLine();
             System.out.print("Update car model (" + car.getModel() + "): ");
             String model = scanner.nextLine();

@@ -34,10 +34,12 @@ public class Main {
             boolean exit = false;
 
             while (!exit) {
-                System.out.println("\nMain Menu:");
+                System.out.println("\n=================LOGIN PAGE=================");
+                System.out.println("Main Menu:");
                 System.out.println("1. Login");
                 System.out.println("2. Register");
                 System.out.println("3. Exit");
+                System.out.println("============================================");
 
                 System.out.print("Choose an option: ");
                 int choice = scanner.nextInt();

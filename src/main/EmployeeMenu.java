@@ -19,7 +19,7 @@ public class EmployeeMenu {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("\nEmployee Menu:");
+            System.out.println("\n=================EMPLOYEE PAGE=================:");
             System.out.println("1. Calculate revenue in a time period");
             System.out.println("2. List the number of cars sold in a time period");
             System.out.println("3. List the number of services sold in a time period");

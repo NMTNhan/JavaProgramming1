@@ -46,7 +46,7 @@ public class ManagerMenu {
         boolean back = false;
 
         while (!back) {
-            System.out.println("\nManager Menu:");
+            System.out.println("\n=================MANAGER PAGE=================:");
             System.out.println("1. View/Search All Entities");
             System.out.println("2. Perform Statistics Operations");
             System.out.println("3. Perform CRUD Operations");

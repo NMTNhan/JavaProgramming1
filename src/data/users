@@ -1,3 +1,4 @@
 u009,manager,123,1985-01-01,123 Manager Blvd,555-0000,newmanager@mail.com,Manager,active
 u007,salesperson,123,1993-04-10,789 Sales Street,555-5678,newsalesperson@mail.com,Employee,active
 u006,client,123,1990-05-21,456 New Street,555-1234,newclient@mail.com,Client,active
+u010,TestUser,123,1010-10-10,Test,09034373,Test@gail.com,Client,Active

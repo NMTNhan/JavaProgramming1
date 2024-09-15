@@ -16,4 +16,5 @@ c018,Audi,A6,2023,24000.0,Blue,available,37000.0,No additional notes,s025
 c019,Chevrolet,Malibu,2022,50000.0,Black,sold,42000.0,Sold to u003,s026;s027
 c020,Honda,Accord,2021,29000.0,Silver,available,32000.0,No additional notes,s028;s029
 c021,Nhan,Cool,2024,39000.0,Red,available,39000.0,,This is a cool car
-c001,Toyota,IDK,2020,57000.0,Red,available,7000.0,,
+c001,Updated,Updated,2020,57000.0,Red,available,7000.0,,
+c001,Maker,Model,2024,57000.0,Red,available,7000.0,,This is a test

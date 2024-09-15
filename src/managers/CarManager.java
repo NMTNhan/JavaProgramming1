@@ -26,15 +26,17 @@ public class CarManager {
             FileUtils.writeFile(CAR_FILE_PATH, new ArrayList<>());  // Create an empty file
         } else {
             loadCarsFromFile();
+            setNextCarID(); // Set the nextCarID after loading cars
         }
     }
 
     // Convert string line from file to a Car object
+    // Convert string line from file to a Car object
     private Car deserializeCar(String line) {
         String[] carData = line.split(",");
 
-        // Check if the data has the correct number of fields
-        if (carData.length != 10) {
+        // Check if the data has the correct number of fields (allowing optional fields to be empty)
+        if (carData.length < 8 || carData.length > 10) {
             throw new IllegalArgumentException("Invalid car data format: " + line);
         }
 
@@ -48,15 +50,20 @@ public class CarManager {
             String status = carData[6];
             double price = Double.parseDouble(carData[7]);
 
-            List<String> serviceIDs = List.of(carData[8].split(";"));
+            // Check if serviceIDs field exists, if not, assign an empty list
+            List<String> serviceIDs = carData.length > 8 && !carData[8].isEmpty()
+                    ? List.of(carData[8].split(";"))
+                    : new ArrayList<>();
 
-            String additionalNotes = carData[9];
+            // Check if additionalNotes field exists, if not, assign an empty string
+            String additionalNotes = carData.length > 9 ? carData[9] : "";
 
             return new Car(carID, make, model, year, mileage, color, status, price, serviceIDs, additionalNotes);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error parsing car data: " + line, e);
         }
     }
+
 
     // Convert a Car object to string for writing to file
     private String serializeCar(Car car) {
@@ -142,4 +149,21 @@ public class CarManager {
         nextCarID++;
         return carID;
     }
+
+
+    // Method to determine the next available car ID based on the highest existing ID
+    private void setNextCarID() {
+        int maxID = 0;
+        for (Car car : cars) {
+            String carID = car.getCarID();
+            if (carID.startsWith("c")) {
+                int currentID = Integer.parseInt(carID.substring(1)); // Extract the numeric part of the ID
+                if (currentID > maxID) {
+                    maxID = currentID;
+                }
+            }
+        }
+        nextCarID = maxID + 1;  // Set nextCarID to one higher than the highest existing ID
+    }
+
 }
